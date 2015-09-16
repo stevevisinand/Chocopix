@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>	
+	</head>
+	<body ng-app>
+		
+		<input type="text" ng-model="recherche" />
+		
+		<select ng-model="order">
+			<option value="username">Organiser par nom</option>
+			<option value="content">Organiser par contenu</option>
+		</select>
+				
+		<div ng-init="users=[{username:'Romain', content:'Banana'}, {username:'Steve', content:'pomme'}, {username:'Margaux', content:'fraise'}]">	
+			{{users}}
+			
+			<div ng-repeat="user in users | filter:{content:recherche} | orderBy: order">
+				<p>
+					<strong>{{user.username}}</strong><br/>
+					{{user.content}}
+				</p>
+
+			</div>
+			
+			{{users | filter:'ma'}}
+		</div>
+		
+		
+		<hr/>
+
+		<input type="text" ng-model="nb1" />
+		<input type="text" ng-model="nb2" />
+		
+		{{"Somme : " + (nb1*1 + nb2*1)}}
+		
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+	</body>
+</html>

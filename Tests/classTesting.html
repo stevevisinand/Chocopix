@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+		
+			/** V1 with Object.create
+			//CLASS PUCE
+			var Puce = {
+				nom : "lucie la puce",
+				gratte : function(){
+					alert("grate grate "+this.nom);
+				},
+			}
+		
+			//CLASS ANIMAL
+			var Animal = {
+				cri : "",
+				puce : Object.create(Puce),
+				crier : function(){
+					return this.cri;
+				},
+			}
+			
+			//CLASS CHAT
+			var Chat = Object.create(Animal);
+			Chat.cri = "miaou";
+			
+			
+			//CLASS CHIEN
+			var Chien = Object.create(Animal);
+			Chien.cri = "Wouf";
+			
+			function main(){
+			
+				felix = Object.create(Chat);
+				felix.puce.gratte();
+				
+				felix.puce.nom = "puce de felix";
+				
+				fenouil = Object.create(Chat);
+				fenouil.puce.gratte();
+
+			}
+			
+			**/
+			
+			
+			/**
+			 * Puce class.
+			 * 
+			 * @access public
+			 * @param mixed nom
+			 * @return void
+			 */
+			function Puce(nom){
+				this.nomP = nom;
+				
+				this.gratter = function(){
+					alert("gratte gratte "+this.nomP);
+				}
+			}
+			
+			
+			/**
+			 * Animal class.
+			 * 
+			 * @access public
+			 * @param mixed cri
+			 * @param mixed nom
+			 * @return void
+			 */
+			function Animal(cri, nom){
+				
+				//private attr
+				var _cri=cri;
+				var _nom=nom;
+				
+				//public attr
+				this._puce = new Puce("lulu la puce");
+				
+				//public functions
+				this.crier = function(){
+					return _cri;
+				}
+				
+				this.setNom = function(newNom){
+					_nom = newNom;
+				}
+				
+				this.getNom = function(){
+					return _nom;
+				}
+			}
+			
+			
+			/**
+			 * Chat class.
+			 * 
+			 * @access public
+			 * @param mixed nom
+			 * @return void
+			 */
+			function Chat(nom){
+				//Pour l'héritage
+				Animal.call(this, "miaou", nom)
+			}
+			
+			Chat.prototype = new Animal();
+			Chat.prototype.constructor = Chat;
+			
+			
+			/**
+			 * main function.
+			 * 
+			 * @access public
+			 * @return void
+			 */
+			function main(){
+				felix = new Chat("felix");
+				//alert(felix.crier());
+				//alert(felix.nom);
+				
+				fenouil = new Chat("fenouil");
+				//alert(fenouil.crier());
+				//alert(fenouil.nom);
+				
+				felix._puce.nomP = "felix puce";
+				felix._puce.gratter();
+				
+				fenouil._puce.gratter();
+				
+				
+				RenomageChat(felix);
+				alert(felix.getNom());
+			}
+			
+			function RenomageChat(chat){
+				chat.setNom("nouveauNomDeChat");
+			}
+			
+		</script>
+		
+	</head>
+	<body>
+		<button onclick="main()">Run main()</button>
+	</body>
+</html>

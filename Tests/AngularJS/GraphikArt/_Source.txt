@@ -1,0 +1,2 @@
+Exercices venant des tutoriels :
+http://www.grafikart.fr/formations/angularjs
