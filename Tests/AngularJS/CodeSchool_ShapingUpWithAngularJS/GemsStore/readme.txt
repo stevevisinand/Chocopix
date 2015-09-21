@@ -1,0 +1,1 @@
+If you encounter errors load index.html with a server (Apache)
