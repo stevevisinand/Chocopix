@@ -1,0 +1,100 @@
+<!--        ____________ _____   				            -->
+<!--       /            \    /   				            -->
+<!--      /     _________\  /					            -->
+<!--      \     \          /					            -->
+<!--       \     \        /	 Steve Visinand		            -->
+<!--        \     \      /   26.09.15			            -->
+<!--   ______\     \    /	 01_autoSize_canvas.html		-->
+<!--  /             \  /						            -->
+<!-- /_______________\/							            -->
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Canvas tutorial</title>
+        <script src="./jquery-1.11.3.min.js"></script>
+		<script type="text/javascript">
+
+            /**
+             * Main function, call by "onload"
+             */
+			function main()
+			{
+                resizeCanvas();
+				var canvas = document.getElementsByClassName('tutorial'); //return a node list
+
+				for (var i = 0; i < canvas.length; ++i) {
+                    var can = canvas[i];
+                    draw(can);
+                }
+			}
+
+            /**
+             * Draw in the "canvas"
+             * @param canvas
+             */
+            function draw(canvas){
+                if (canvas.getContext) {
+                    var ctx = canvas.getContext('2d');
+
+                    ctx.fillStyle = "#FF0000";
+                    ctx.fillRect(10, 10, 90, 90);
+                }
+            }
+
+            /**
+             * call by the resizeEvent. Set a full-width size to the canvas '#withJS'
+             */
+            function resizeCanvas(){
+                var canvas = $('#withJS');
+                var margin = 2 * parseInt($('body').css('margin')) + 2 * parseInt(canvas.css('margin'));
+                var width = window.innerWidth - margin;
+                canvas.attr('width', width);
+
+                // ATTENTION, ON NE PEU PAS UTILISER "$('#withJS')"
+                var can = document.getElementById('withJS');
+                draw(can);
+            }
+
+            /**
+             * Resize of the widows
+             * @param event
+             */
+            window.onresize = function(event) {
+                resizeCanvas();
+            }
+
+		</script>
+		
+		<style type="text/css">
+
+			.tutorial{
+				border: 1px solid black;
+				display: block;
+			}
+			#withCSS{
+				width:100%;
+				height: 100%;
+			}
+		</style>
+		
+	</head>
+	
+	<body onload="main();">
+
+        <p style="color: red;">
+            Attention, la taille fixée en CSS sur la balise canvas déforme le dessin ! Il faut fixer ses tailles dans les attributs !
+            <br/>
+            De plus faire attention à redessiner le dessin au changement de taille avec JS du canvas
+        </p>
+		<h1>Same draw</h1>
+		<h2>with size at 100% in CSS</h2>
+		<canvas class="tutorial" id="withCSS"></canvas>
+		<hr/>
+		<h2>with auto-size in JS</h2>
+		<canvas class="tutorial" id="withJS" width="500"></canvas>
+		
+	</body>
+</html>
