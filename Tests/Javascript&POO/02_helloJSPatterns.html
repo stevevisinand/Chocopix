@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>JS la revanche</title>
+
+        <script type="text/javascript">
+
+            //----------------------------------------------
+            //--------------Basic Constructors--------------
+            //----------------------------------------------
+            function Car( model, year, miles ) {
+ 
+              this.model = model;
+              this.year = year;
+              this.miles = miles;
+
+              this.toString = function () {
+                return this.model + " has done " + this.miles + " miles";
+              };
+            }
+
+            // Usage:
+            var civic = new Car( "Honda Civic", 2009, 20000 );
+            var mondeo = new Car( "Ford Mondeo", 2010, 5000 );
+
+            // and then open our browser console to view the
+            // output of the toString() method being called on
+            // these objects
+            console.log("Basic Constructors : " + civic.toString());
+            console.log("Basic Constructors : " + mondeo.toString());
+            
+            
+            //
+            //  - "toString" est instanciée à chaque objet créé : lourd
+            //
+            
+            
+            //----------------------------------------------
+            //----------Constructors With Prototypes--------
+            //----------------------------------------------
+            function Car2( model, year, miles ) {
+ 
+              this.model = model;
+              this.year = year;
+              this.miles = miles;
+
+            }
+
+            // Note here that we are using Object.prototype.newMethod rather than
+            // Object.prototype so as to avoid redefining the prototype object
+            Car2.prototype.toString = function () {
+              return this.model + " has done " + this.miles + " miles";
+            };
+
+            // Usage:
+            var civic2 = new Car2( "Honda Civic", 2009, 20000 );
+            var mondeo2 = new Car2( "Ford Mondeo", 2010, 5000 );
+
+            console.log("Constructors With Prototypes : " + civic2.toString() );
+            console.log("Constructors With Prototypes : " + mondeo2.toString() );
+            
+            
+            //
+            //  + "toString" est instancié une fois pour tous, il est partagé
+            //
+            
+            
+            //----------------------------------------------
+            //------------The Module Pattern----------------
+            //----------------------------------------------
+            // On peu créer des namespace avec ce pattern
+            // Ou on peu creer un objet unique qui aura des attributs privés et public !
+            
+            var myNamespace = (function () {
+ 
+              var myPrivateVar, myPrivateMethod;
+
+              // A private counter variable
+              myPrivateVar = 0;
+
+              // A private function which logs any arguments
+              myPrivateMethod = function( foo ) {
+                  console.log( foo );
+              };
+
+              return {
+
+                // A public variable
+                myPublicVar: "foo",
+
+                // A public function utilizing privates
+                myPublicFunction: function( bar ) {
+
+                  // Increment our private counter
+                  myPrivateVar++;
+
+                  // Call our private method using bar
+                  myPrivateMethod( bar );
+
+                }
+              };
+
+            })();
+            
+            myNamespace.myPublicFunction("Hello from public zone !");
+            
+            
+            
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
