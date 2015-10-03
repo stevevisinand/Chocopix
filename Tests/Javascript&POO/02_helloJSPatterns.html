@@ -5,7 +5,14 @@
         <title>JS la revanche</title>
 
         <script type="text/javascript">
+            
 
+            //-------------------------------------------------------
+            //-------------------------------------------------------
+            //---------------------Constructors----------------------
+            //-------------------------------------------------------
+            //-------------------------------------------------------
+            
             //----------------------------------------------
             //--------------Basic Constructors--------------
             //----------------------------------------------
@@ -66,11 +73,28 @@
             //
             
             
-            //----------------------------------------------
-            //------------The Module Pattern----------------
-            //----------------------------------------------
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            //-------------------------------------------------------
+            //-------------------------------------------------------
+            //------------------------Modules------------------------
+            //-------------------------------------------------------
+            //-------------------------------------------------------
+            
+            //-------------------------------------------------
+            //------------The Module Pattern V1----------------
+            //-------------------------------------------------
             // On peu créer des namespace avec ce pattern
-            // Ou on peu creer un objet unique qui aura des attributs privés et public !
+            // Ou on peu creer un objet _unique_ qui aura 
+            // des attributs privés et public !
             
             var myNamespace = (function () {
  
@@ -103,8 +127,138 @@
 
             })();
             
-            myNamespace.myPublicFunction("Hello from public zone !");
+            myNamespace.myPublicFunction("The Module Pattern V1 : " + "Hello from public zone !");
             
+            
+            //-------------------------------------------------
+            //------------The Module Pattern V2----------------
+            //-------------------------------------------------
+            //Cette variation syntaxique à le mérite d'être plus clair.
+            
+            // Global module
+            var myModule = (function () {
+
+              // Module object
+              var module = {},
+                
+              privateVariable = "The Module Pattern V2 : Hello World";
+
+              function privateMethod() {
+                // ...
+              }
+
+              module.publicProperty = "Foobar";
+              module.publicMethod = function () {
+                console.log( privateVariable );
+              };
+
+              return module;
+
+            })();
+            
+            
+            myModule.privateVariable = "hum ? do this is useless ?";
+            console.log("The Module Pattern V2 : " + myModule.privateVariable); //NOP it declare a new methode ...
+            myModule.publicMethod(); 
+            
+            
+            //----Essayons un constructeur avec le pattern module ?----
+            // /!\ NON ! JAMAIS
+            function Chien(name, cri) {
+
+              // Module object
+              var chien = {},
+                
+              private_name = name;
+              private_cri = cri;
+
+              function privateMethod() {
+                console.log("You can't call me !");
+              }
+
+              chien.publicProperty = "Foobar";
+              chien.public_criFunction = function () {
+                console.log("The Module Pattern V2 test : " + private_cri );
+              };
+
+              return chien;
+
+            }
+            
+            var dog1 = new Chien("Snoopy", "Waff");
+            dog1.private_cri = "hum?"; //useless
+            var dog2 = new Chien("Scooby", "Scooobydoudoudou");
+            
+            dog2.public_criFunction();
+            dog1.public_criFunction(); //AIEAIEAIE !
+            
+            //Sortie : Scooobydoudoudou et Scooobydoudoudou
+            
+            // !!! ATTENTION !!!
+            // LES VARIABLES "PRIVEES" DE CE PATTERN SONT LES MÊMES 
+            // POUR CHAQUE OBJET.
+            // JAMAIS DE NEW AVEC CE PATTERN !!!
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            //-------------------------------------------------------
+            //-------------------------------------------------------
+            //-------------------Sub-classing------------------------
+            //-------------------------------------------------------
+            //-------------------------------------------------------
+            
+            var Person = function( firstName, lastName){
+ 
+              this.firstName = firstName;
+              this.lastName = lastName;
+              this.gender = "male";
+
+            };
+            Person.prototype.toString = function () {
+              return "I'm not a superhero : " + this.firstName + " " + this.lastName;
+            };
+            
+            // a new instance of Person can then easily be created as follows:
+            
+
+            // Define a subclass constructor for for "Superhero":
+            var Superhero = function( firstName, lastName, powers ){
+
+                // Invoke the superclass constructor on the new object
+                // then use .call() to invoke the constructor as a method of
+                // the object to be initialized.
+                Person.call( this, firstName, lastName );
+
+                // Finally, store their powers, a new array of traits not found in a normal "Person"
+                this.powers = powers;
+                
+            };
+            Superhero.prototype = Object.create( Person.prototype );
+            Superhero.prototype.toString = function () {
+              //return this.prototype.prototype.toString() + " " + this.powers;
+                return "I'm a superhero : " + this.firstName + " " + this.lastName + " " + this.powers;
+            };
+            
+            
+            var superman = new Superhero( "Clark", "Kent", ["flight","heat-vision"] );
+            
+            var clark = new Person( "Clark", "Kent" );
+            
+            console.log("Sub-classing : " + clark.toString() );
+            console.log("Sub-classing : " + superman.toString() );
+            
+            
+             
             
             
         </script>
