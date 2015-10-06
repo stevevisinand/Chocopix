@@ -1,0 +1,97 @@
+<!doctype html>
+<html ng-app="SuperheroicJS">
+    <head>
+        <meta charset="UTF-8">
+        <title>POO staring AngularJS</title>
+
+        <!--<script type="text/javascript" src="angular.min.js"></script>-->
+
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+
+        <script type="text/javascript" src="app.js"></script>
+        <script type="text/javascript" src="heroes_module.js"></script>
+        <script type="text/javascript" src="Personne.js"></script>
+        <script type="text/javascript" src="SuperHero.js"></script>
+        <script type="text/javascript" src="Ligue.js"></script>
+
+
+        <script type="text/javascript">
+
+        </script>
+
+        <style type="text/css">
+            body{
+                font-family: sans-serif;
+            }
+
+            h1{
+                font-size: 100px;
+            }
+            h3{
+                border-top-style: dotted;
+                border-top-width: 2px;
+                border-bottom: dotted;
+                border-bottom-width: 2px;
+                font-size: 40px;
+                text-align: center;
+
+            }
+            .HeroPres{
+                position: relative;
+            }
+
+            .HeroPres h4 {
+                border-top-style: dotted;
+                border-top-width: 1px;
+                font-size: 23px;
+                margin: 0px;
+                padding: 0px;
+
+                margin-top: 30px;
+                padding-top: 5px;
+
+                text-align: center;
+            }
+            .HeroPres .info{
+                color: darkgray;
+                margin-top: 5px;
+            }
+            .HeroPres .miniHead{
+                margin-top: 5px;
+                font-weight: 900;
+                margin-bottom: 0px;;
+            }
+            .HeroPres ul{
+                margin: 5px;
+            }
+            .HeroPres .btnDel{
+                float: right;
+            }
+
+            .inscription{
+                background-color: #eeeeee;
+                padding: 5px;
+            }
+        </style>
+    </head>
+    <body ng-controller="HerosCtrl as heroes">
+    <header>
+        <h1 class="text-center">Heroes List</h1>
+    </header>
+
+    <div ng-repeat="ligue in heroes.listLigues">
+
+        <h3>{{ligue.strName}}</h3>
+        <hero-view></hero-view>
+
+        <br/>
+        <hr/>
+        <add-hero></add-hero>
+
+    </div>
+
+
+    </body>
+</html>

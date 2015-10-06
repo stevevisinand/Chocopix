@@ -1,0 +1,16 @@
+<div class="HeroPres" ng-repeat="hero in ligue.tab_superHeroes">
+    <h4>{{hero.strPseudo}}</h4>
+    <p class="info">{{hero.strFirstName + " " + hero.strLastName}} <br/>
+        Age : {{hero.iAge}}</p>
+
+    <p class="miniHead">SuperPowers</p>
+    <ul>
+        <li ng-repeat="power in hero.tab_powers">{{power}}</li>
+    </ul>
+    <p class="miniHead">Weakness</p>
+    <ul>
+        <li ng-repeat="weakness in hero.tab_weakness">{{weakness}}</li>
+    </ul>
+
+    <button class="btnDel" ng-click="ligue.deletehero(hero)">Delete this hero, he is too useless</button>
+</div>
