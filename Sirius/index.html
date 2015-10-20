@@ -1,0 +1,85 @@
+<!doctype html>
+<html ng-app="Drawer">
+    <head>
+        <meta charset="UTF-8">
+        <title>Pixel Papaye</title>
+
+        <!------------------------------------------------->
+        <!--------------------Scripts---------------------->
+        <!--CDN-->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+        
+        
+        <!--LOCAL-->
+        <!--<script type="text/javascript" src="scripts/framework/angular.min.js"></script>-->
+        
+        <script type="text/javascript" src="scripts/framework/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="scripts/auto-size.js"></script>
+        <script type="text/javascript" src="scripts/app.js"></script>
+        
+        
+        
+        <!------------------------------------------------->
+        <!---------------------Styles---------------------->
+        <!--LOCAL-->
+        <link rel="stylesheet" type="text/css" href="styles/styles.css">
+        
+        <!--CDN-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    </head>
+    <body ng-controller="ViewCtrl">
+        <header id="head">
+                <div id="head_logo"> <p>Pixel Papaye</p> </div>
+        </header>
+
+            <div class="left_pannel" ng-controller="DrawToolsCtrl as panel">
+
+                <div class="left_pannel_name">
+                    <p>{{panel.name}}</p>
+                </div>
+
+
+
+                <div class="control_cat">
+                    <!--<div class="control_head"> <p>Une catégorie</p> </div>-->
+
+                    <div class="control_element"><i class="fa fa-black-tie"></i></div>
+                    <div class="control_element"><i class="fa fa-flask"></i></div>
+                    <div class="control_element"><i class="fa fa-black-tie"></i></div>
+                    
+                </div>
+
+
+                <div class="control_cat">
+
+                    <!--<div class="control_head"> <p>Une catégorie</p> </div>-->
+
+                    <div class="control_element"><i class="fa fa-black-tie"></i></div>
+                    <div class="control_element"><i class="fa fa-black-tie"></i></div>
+                    <div class="control_element"><i class="fa fa-black-tie"></i></div>
+                </div>
+
+
+
+                <div id="control_melange">
+
+                    <div class="melange_color">
+                        &nbsp;
+                    </div>
+
+                    <div class="melange_color">
+                        &nbsp;
+                    </div>
+                </div>
+
+
+            </div>
+            
+            <div id="drawing_zone">
+                <canvas id="draw" ng-controller="DrawZoneCtrl"></canvas>
+
+            </div>
+      
+    </body>
+</html>
