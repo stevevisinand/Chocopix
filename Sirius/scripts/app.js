@@ -21,6 +21,10 @@
         
         //Module for the window resizing
         $rootScope.resizeModule = {};
+        
+        //Module to call the draw functions
+        $rootScope.drawModule = {};
+        $rootScope.drawModule.canvas = document.getElementById('draw');
     });
     
     //====================================================================
@@ -93,16 +97,30 @@
             var canvas = $('#draw');
             canvas.attr('width', w);
             canvas.attr('height', h);
+            
+
+            $scope.drawModule.draw();
+            
         };
         
         
         // --- --- --- --- --- --- --- --- --- --- ---
-    
-        
+
     });
     
-    app.controller('DrawZoneCtrl', function(){
     
+    app.controller('DrawZoneCtrl', function($scope, $rootScope){
+        
+        $rootScope.drawModule.draw = function(){
+            if (this.canvas.getContext) {
+                var ctx = this.canvas.getContext('2d');
+
+                ctx.fillStyle = "#FF0000";
+                ctx.fillRect(200, 100, 90, 90);
+            }
+        };
+        
+        $scope.drawModule.draw();
     });
     
     
