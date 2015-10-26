@@ -1,4 +1,14 @@
 @charset "UTF-8";
+/*--        ____________ _____   				            --*/
+/*--       /            \    /   				            --*/
+/*--      /     _________\  /					            --*/
+/*--      \     \          /					            --*/
+/*--       \     \        /	 Steve Visinand		            --*/
+/*--        \     \      /   26.10.15			            --*/
+/*--   ______\     \    /	 styles.css    		            --*/
+/*--  /             \  /	 "Main styles file"		        --*/
+/*-- /_______________\/							            --*/
+
 
 @font-face {
     font-family: Lato;
@@ -104,7 +114,6 @@ header #head_logo p{
     
     color: white;
 }
-
 
 .control_element{
     
