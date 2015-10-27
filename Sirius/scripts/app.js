@@ -11,9 +11,9 @@
 
 (function() {
 
-    var app = angular.module('Drawer', ['selectTools-directives']);
+    var app = angular.module('Drawer', ['selectTools-directives', 'drawModule', 'resizeModule']);
 
-    
+
     
     app.run(function($rootScope) {
         
@@ -23,8 +23,8 @@
         $rootScope.resizeModule = {};
         
         //Module to call the draw functions
-        $rootScope.drawModule = {};
-        $rootScope.drawModule.canvas = document.getElementById('draw');
+        //$rootScope.drawModule = {};
+        //$rootScope.drawModule.canvas = document.getElementById('draw');
     });
     
     //====================================================================
@@ -33,7 +33,7 @@
     //==== Windows resizing                                           ====
     //====================================================================
     
-    app.controller('GlobalViewCtrl', function ($scope, $rootScope) {
+    app.controller('GlobalViewCtrl', function ($scope, $rootScope, drawUtils, resizeUtils) {
         
         // --- --- --- --- --- --- --- --- --- --- ---
         // --- --- --- --- JS resizing --- --- --- ---
@@ -57,7 +57,7 @@
 
             $scope.windowHeight = newValue.h;
             $scope.windowWidth = newValue.w;
-            $scope.resizeModule.resizeApp(newValue.w,newValue.h);
+            resizeUtils.resizeApp(newValue.w,newValue.h);
             
         }, true);
 
@@ -68,40 +68,7 @@
             $scope.$apply();
         });
         
-        /**
-        *   Resize the application width the news w and h values
-        *   Defined in the rootScope ! shared methode
-        *   Call automatically "resizeCanvas"
-        *   w,h = new size
-        */
-        $rootScope.resizeModule.resizeApp = function(w, h){
-            
-            var h = h - $('#head').height() - 4; //border = 4px
-            var left_pannels = $('.left_pannel');
 
-            var widthPannels = 0;
-            $('.left_pannel').each(function() {
-                $(this).height(h);
-                widthPannels = widthPannels + $(this).width();
-            });
-
-            $scope.resizeModule.resizeCanvas(w - widthPannels - 4, h); 
-        };
-        
-        /**
-        *   Set a size on the canvas "#draw"
-        *   Defined in the rootScope ! shared methode
-        *   w, h = new sizes
-        */
-        $rootScope.resizeModule.resizeCanvas = function(w, h){
-            var canvas = $('#draw');
-            canvas.attr('width', w);
-            canvas.attr('height', h);
-            
-
-            $scope.drawModule.draw();
-            
-        };
         
         
         // --- --- --- --- --- --- --- --- --- --- ---
@@ -109,18 +76,10 @@
     });
     
     
-    app.controller('DrawZoneCtrl', function($scope, $rootScope){
-        
-        $rootScope.drawModule.draw = function(){
-            if (this.canvas.getContext) {
-                var ctx = this.canvas.getContext('2d');
+    app.controller('DrawZoneCtrl', function($scope, drawUtils){
 
-                ctx.fillStyle = "#FF0000";
-                ctx.fillRect(200, 100, 90, 90);
-            }
-        };
-        
-        $scope.drawModule.draw();
+
+        drawUtils.draw();
     });
     
     

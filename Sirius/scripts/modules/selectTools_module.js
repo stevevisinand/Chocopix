@@ -11,18 +11,18 @@
 
 (function() {
     
-    var appModule = angular.module('selectTools-directives', []);
+    var appModule = angular.module('selectTools-directives', ['resizeModule']);
     
     //====================================================================
     //====================================================================
     //========================DRAW TOOLS DIRECT===========================
     //==== left pannel infos, buttons listeners                       ====
     //====================================================================
-    appModule.directive("drawtoolspannel", function() {
+    appModule.directive("drawtoolspannel", function(resizeUtils) {
       return {
         restrict: "E",
         templateUrl: "views/leftpannel-tools.html",
-        controller: function($scope) {
+        controller: function($scope, resizeUtils) {
 
             this.name = "Control";
         
@@ -34,7 +34,7 @@
             
             //resize the windows when this module is loaded
             var w = $(window);
-            $scope.resizeModule.resizeApp(w.width(), w.height());
+            resizeUtils.resizeApp(w.width(), w.height());
 
         },
         controllerAs: "panel"
