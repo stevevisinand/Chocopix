@@ -20,7 +20,7 @@
         // ==> Define globals attribute of all "scopes" here
         
         //Module for the window resizing
-        $rootScope.resizeModule = {};
+        //$rootScope.resizeModule = {};
         
         //Module to call the draw functions
         //$rootScope.drawModule = {};
@@ -67,10 +67,8 @@
         w.bind('resize', function () {
             $scope.$apply();
         });
-        
 
-        
-        
+
         // --- --- --- --- --- --- --- --- --- --- ---
 
     });

@@ -35,13 +35,21 @@ drawModule.factory('drawUtils', function() {
         };
     }
 
+
+    var pen = new Pencil(canvas.getContext('2d'));
+    var pressed = false;
     /**
      * Add listener on mouseMove
      */
     canvas.addEventListener('mousemove', function(evt) {
         var mousePos = getMousePos(canvas, evt);
         var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-        console.log(message);
+        //console.log(message);
+
+        if(pressed) {
+            pen.addPoint(mousePos.x, mousePos.y);
+        }
+
     }, false);
 
 
@@ -51,7 +59,13 @@ drawModule.factory('drawUtils', function() {
     canvas.addEventListener("mousedown", function(evt) {
         var mousePos = getMousePos(canvas, evt);
         var message = 'Mouse DOWN: ' + mousePos.x + ',' + mousePos.y;
-        console.log(message);
+        //console.log(message);
+
+
+        pen.addPoint(mousePos.x, mousePos.y);
+        pressed = true;
+
+
 
     }, false);
 
@@ -61,7 +75,11 @@ drawModule.factory('drawUtils', function() {
     canvas.addEventListener("mouseup", function(evt) {
         var mousePos = getMousePos(canvas, evt);
         var message = 'Mouse UP: ' + mousePos.x + ',' + mousePos.y;
-        console.log(message);
+        //console.log(message);
+
+
+        pressed = false;
+        pen.end();
 
     }, false);
 
