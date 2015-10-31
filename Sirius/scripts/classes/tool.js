@@ -8,15 +8,25 @@
 /*--  /             \  /	 Abstract Tool class            --*/
 /*-- /_______________\/							            --*/
 
+/**
+ * Tools base abstract class
+ * @abstract
+ * @param ctx
+ * @constructor
+ */
 var Tool = function(ctx){
+
     this.ctx = ctx;
 };
 
 
 
-
-
-var Pencil = function (ctx) {
+/**
+ * Pencil tool, Tool heritage
+ * @param ctx : canvas context
+ * @constructor
+ */
+var Pencil = function (ctx, brush) {
 
     // Invoke the superclass constructor on the new object
     // then use .call() to invoke the constructor as a method of
@@ -26,16 +36,24 @@ var Pencil = function (ctx) {
     this.line = [];
     this.distPt = 0;
     this.density = 1; //Draw per px
+    this.brush = brush;
 
 };
 Pencil.prototype = Object.create( Tool.prototype );
 
+/**
+ * Call this to end the line
+ */
 Pencil.prototype.end = function(){
     this.line = [];
     this.distPt = 0;
 };
 
-
+/**
+ * Add a point on the line, complete space in the line (with this.density)
+ * @param x : Coord X on canvas of point to add
+ * @param y : Coord Y on canvas of point to add
+ */
 Pencil.prototype.addPoint = function (x,y) {
 
     var p1 = { x: x, y: y };
@@ -54,10 +72,7 @@ Pencil.prototype.addPoint = function (x,y) {
 
             if(nPt < 2)
             {
-                this.ctx.beginPath();
-                this.ctx.fillStyle="#222222";
-                this.ctx.arc(x, y, 10, 0, 2 * Math.PI);
-                this.ctx.fill();
+                this.brush.drawBrush(x,y);
             }
             else
             {
@@ -73,10 +88,7 @@ Pencil.prototype.addPoint = function (x,y) {
                     var x = p0.x + i*uX;
                     var y = p0.y + i*uY;
 
-                    this.ctx.beginPath();
-                    this.ctx.fillStyle="#222222";
-                    this.ctx.arc(x, y, 10, 0, 2 * Math.PI);
-                    this.ctx.fill();
+                    this.brush.drawBrush(x,y);
                 }
             }
 
@@ -86,11 +98,8 @@ Pencil.prototype.addPoint = function (x,y) {
 
     }
     else{
-        this.ctx.beginPath();
-        this.ctx.fillStyle="#FF2222";
-        this.ctx.arc(p1.x, p1.y, 10, 0, 2 * Math.PI);
-        this.ctx.fill();
 
+        this.brush.drawBrush(p1.x, p1.y);
         this.line.push(p1);
     }
 

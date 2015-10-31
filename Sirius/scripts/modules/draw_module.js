@@ -18,7 +18,6 @@ drawModule.factory('drawUtils', function() {
     //
     // private attributs
     //
-
     canvas = document.getElementById('draw');
 
     /**
@@ -36,7 +35,8 @@ drawModule.factory('drawUtils', function() {
     }
 
 
-    var pen = new Pencil(canvas.getContext('2d'));
+    var brush = new SimpleDotBrush(canvas.getContext('2d'), 2, "#FF0000", 1.0);
+    var pen = new Pencil(canvas.getContext('2d'), brush);
     var pressed = false;
     /**
      * Add listener on mouseMove
