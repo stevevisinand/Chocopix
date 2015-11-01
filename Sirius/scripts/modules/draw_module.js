@@ -19,6 +19,7 @@ drawModule.factory('drawUtils', function() {
     // private attributs
     //
     canvas = document.getElementById('draw');
+    context = canvas.getContext('2d');
 
     /**
      * get the mouse pos in the canvas
@@ -34,9 +35,21 @@ drawModule.factory('drawUtils', function() {
         };
     }
 
+    /**
+     * Simply clear the canvas
+     * @param canvas
+     */
+    function clearCanvas() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+    }
 
-    var brush = new SimpleDotBrush(canvas.getContext('2d'), 2, "#FF0000", 1.0);
-    var pen = new Pencil(canvas.getContext('2d'), brush);
+
+    var brush = new SimpleDotBrush(context, 2, "#FF0000", 1.0);
+    var pen = new Pencil(context, brush);
+    var drawZone = new Draw(context, 10, 10, 500, 500);
+
+
+
     var pressed = false;
     /**
      * Add listener on mouseMove
@@ -65,8 +78,6 @@ drawModule.factory('drawUtils', function() {
         pen.addPoint(mousePos.x, mousePos.y);
         pressed = true;
 
-
-
     }, false);
 
     /**
@@ -80,6 +91,9 @@ drawModule.factory('drawUtils', function() {
 
         pressed = false;
         pen.end();
+        drawZone.save();
+        clearCanvas();
+        drawZone.drawMe();
 
     }, false);
 
@@ -94,12 +108,11 @@ drawModule.factory('drawUtils', function() {
      */
     drawModule.draw = function(){
         if (canvas.getContext) {
-            var ctx = canvas.getContext('2d');
-
-            ctx.fillStyle = "#FF0000";
-            ctx.fillRect(200, 100, 90, 90);
+            drawZone.drawMe();
         }
     };
+
+
 
 
     return drawModule;

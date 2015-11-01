@@ -34,6 +34,10 @@ body {
     padding: 0;
     
     background-color: #3A3939;
+
+
+    background-image: url(http://www.transparenttextures.com/patterns/graphy-dark.png);
+    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
 p{
@@ -55,8 +59,12 @@ header#head{
     padding-left: 10px;
     padding-right: 10px;
     
-    -webkit-box-shadow: 0 0 3px 0 rgba(0,0,0,1);
-    box-shadow: 0 0 3px 0 rgba(0,0,0,1);
+    -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.8);
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.8);
+
+
+    background-image: url(http://www.transparenttextures.com/patterns/absurdity.png);
+    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 header #head_logo{
 
