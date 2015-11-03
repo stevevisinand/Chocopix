@@ -17,25 +17,26 @@
     </div>
 
 
-    <div class="control_cat">
-        <!--<div class="control_head"> <p>Une catégorie</p> </div>-->
 
+    <!--<div class="control_cat">-->
+        <!--<div class="control_head"> <p>Une catégorie</p> </div>-->
+    <!--
         <div class="control_element" ng-click="panel.clickTest()"><i class="fa fa-black-tie"></i></div>
         <div class="control_element"><i class="fa fa-flask"></i></div>
         <div class="control_element"><i class="fa fa-black-tie"></i></div>
 
     </div>
+    -->
 
 
-    <div class="control_cat">
+    <!--<div class="control_tool" id="control_tool_used">
+        <div class="control_tool_ico"><i class="fa fa-pencil"></i></div> <div class="control_tool_title"><p>Pinceau</p></div>
+    </div>-->
 
-        <!--<div class="control_head"> <p>Une catégorie</p> </div>-->
 
-        <div class="control_element"><i class="fa fa-black-tie"></i></div>
-        <div class="control_element"><i class="fa fa-black-tie"></i></div>
-        <div class="control_element"><i class="fa fa-black-tie"></i></div>
+    <div ng-repeat="tool in panel.tools" class="control_tool"  ng-click="tool.clickTool()" ng-attr-id="{{tool.isSelected ? 'control_tool_used' : '' }}" >
+        <div class="control_tool_ico"><i class="fa fa-circle"></i></div> <div class="control_tool_title"><p>{{tool.name}}</p></div>
     </div>
-
 
 
     <div id="control_melange">

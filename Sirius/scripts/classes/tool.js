@@ -37,9 +37,15 @@ var Pencil = function (ctx, brush) {
     this.distPt = 0;
     this.density = 1; //Draw per px
     this.brush = brush;
-
 };
 Pencil.prototype = Object.create( Tool.prototype );
+
+/**
+ * Set a new brush to the tool
+ */
+Pencil.prototype.setBrush = function(brush) {
+    this.brush = brush;
+};
 
 /**
  * Call this to end the line

@@ -16,10 +16,26 @@ drawModule.factory('drawUtils', function() {
     var drawModule = {};
 
     //
-    // private attributs
+    // private values
     //
+
+    //canvas
     canvas = document.getElementById('draw');
     context = canvas.getContext('2d');
+
+
+    //draw
+    var drawZone = new Draw(context, 10, 10, 500, 500);
+
+    //default values
+    var drawBrush = new SimpleDotBrush(context, 2, "#FF0000", 1.0, false);
+    var eraserBrush = new SimpleDotBrush(context, 10, "#FF0000", 1.0, true);
+
+    var pen = new Pencil(context, drawBrush);
+
+    //use to detect the mouse click
+    var pressed = false;
+
 
     /**
      * get the mouse pos in the canvas
@@ -44,19 +60,12 @@ drawModule.factory('drawUtils', function() {
     }
 
 
-    var brush = new SimpleDotBrush(context, 2, "#FF0000", 1.0);
-    var pen = new Pencil(context, brush);
-    var drawZone = new Draw(context, 10, 10, 500, 500);
-
-
-
-    var pressed = false;
     /**
      * Add listener on mouseMove
      */
     canvas.addEventListener('mousemove', function(evt) {
         var mousePos = getMousePos(canvas, evt);
-        var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
+        //var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
         //console.log(message);
 
         if(pressed) {
@@ -71,7 +80,7 @@ drawModule.factory('drawUtils', function() {
      */
     canvas.addEventListener("mousedown", function(evt) {
         var mousePos = getMousePos(canvas, evt);
-        var message = 'Mouse DOWN: ' + mousePos.x + ',' + mousePos.y;
+        //var message = 'Mouse DOWN: ' + mousePos.x + ',' + mousePos.y;
         //console.log(message);
 
 
@@ -85,7 +94,7 @@ drawModule.factory('drawUtils', function() {
      */
     canvas.addEventListener("mouseup", function(evt) {
         var mousePos = getMousePos(canvas, evt);
-        var message = 'Mouse UP: ' + mousePos.x + ',' + mousePos.y;
+        //var message = 'Mouse UP: ' + mousePos.x + ',' + mousePos.y;
         //console.log(message);
 
 
@@ -99,9 +108,50 @@ drawModule.factory('drawUtils', function() {
 
 
 
+
     //
-    // public attributs
+    // public values
     //
+
+    //tools are the available tools
+    drawModule.tools = [];
+
+    /**
+     * a pannelTool contain the informations to show the tools in the pannel
+     * @param name : name of the tool
+     * @param tool : the tool
+     * @param isSelected : if it is currently in use
+     * @param fctClick : function to activate when click on it
+     */
+    var pannelTool = function (name, tool, isSelected, fctClick) {
+        this.name = name;
+        this.tool = tool;
+        this.isSelected = isSelected; //Draw per px
+
+        this.clickTool = fctClick;
+    };
+
+    /**
+     * Unselect all tools in drawModule.tools
+     */
+    function unselectAlltools(){
+        drawModule.tools.forEach(function(tool) {
+            tool.isSelected = false;
+        });
+    }
+
+    //Create the pannel
+    drawModule.tools.push(new pannelTool("Pinceau", drawBrush, true, function(){
+        unselectAlltools();
+        this.isSelected = true;
+        pen.setBrush(this.tool);
+    }));
+
+    drawModule.tools.push(new pannelTool("Gomme", eraserBrush, false, function(){
+        unselectAlltools();
+        this.isSelected = true;
+        pen.setBrush(this.tool);
+    }));
 
     /**
      * Main draw function, call it when redrawing scene is necessary

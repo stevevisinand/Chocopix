@@ -123,6 +123,83 @@ header #head_logo p{
     color: white;
 }
 
+.control_tool:hover{
+
+    background-color: #00C3FF;
+
+
+    color: white;
+    cursor: pointer;
+
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    -ms-transition: all 0.1s linear;
+    -o-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+}
+.control_tool:active{
+    background-color: #0089B2;
+
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    -ms-transition: all 0.1s linear;
+    -o-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+
+}
+
+.control_tool{
+    /**background-color: #00C3FF;**/
+
+    background-color: #e3e3e3;
+    padding: 6px;
+    padding-top: 4px;
+    padding-bottom: 0px;
+
+    margin-bottom: 5px;
+    margin-top: 5px;
+
+    height: 40px;
+
+    -webkit-transition: background 0.2s linear;
+    -moz-transition: background 0.2s linear;
+    -ms-transition: background 0.2s linear;
+    -o-transition: background 0.2s linear;
+    transition: background 0.2s linear;
+}
+
+#control_tool_used{
+    color: white;
+    background-color: #0089B2;
+}
+
+.control_tool_ico i{
+    padding: 0px;
+    margin: 0px;
+    margin-right: 10px;
+    font-size: 32px;
+    line-height: 32px;
+    vertical-align: middle;
+    line-height: 32px;
+}
+.control_tool_title{
+
+    padding: 0px;
+    margin: 0px;
+}
+.control_tool_title p{
+    padding: 0px;
+    margin: 0px;
+
+    vertical-align: middle;
+    line-height: 32px;
+}
+.control_tool div{
+    height: 40px;
+    display: inline-block;
+}
+
+
 .control_element{
     
     border-style: solid;

@@ -15,14 +15,17 @@
  * @param size : size of the brush
  * @param rvbColor : rvb brush color, format hex : "#FFFFFF"
  * @param opacity : opactiy of the brush
+ * @param eraserMode : boolean value, erase of draw
  * @constructor
  */
-var Brush = function(ctx, size, rvbColor, opacity){
+var Brush = function(ctx, size, rvbColor, opacity, eraserMode){
 
     this.ctx = ctx;
     this.size = size;
     this.rvbColor = rvbColor;
     this.opactiy = opacity;
+
+    this.eraserMode = eraserMode;
 };
 
 /**
@@ -43,14 +46,15 @@ Brush.prototype.drawBrush = function(x, y){
  * @param size : size of the brush
  * @param rvbColor : rvb brush color
  * @param opacity : opactiy of the brush
+ * @param eraserMode : boolean value, erase of draw
  * @constructor
  */
-var SimpleDotBrush = function (ctx, size, rvbColor, opacity) {
+var SimpleDotBrush = function (ctx, size, rvbColor, opacity, eraserMode) {
 
     // Invoke the superclass constructor on the new object
     // then use .call() to invoke the constructor as a method of
     // the object to be initialized.
-    Brush.call(this, ctx, size, rvbColor, opacity);
+    Brush.call(this, ctx, size, rvbColor, opacity, eraserMode);
 
 };
 SimpleDotBrush.prototype = Object.create( Brush.prototype );
@@ -61,6 +65,14 @@ SimpleDotBrush.prototype = Object.create( Brush.prototype );
  * @param y : y Pos
  */
 SimpleDotBrush.prototype.drawBrush = function(x, y){
+
+    if(this.eraserMode){
+        this.ctx.globalCompositeOperation = "destination-out";
+    }
+    else{
+        this.ctx.globalCompositeOperation = "source-over";
+    }
+
     this.ctx.beginPath();
     this.ctx.fillStyle=this.rvbColor;
     this.ctx.arc(x, y, this.size, 0, 2 * Math.PI);
