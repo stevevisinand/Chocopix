@@ -34,20 +34,33 @@
     </div>-->
 
 
-    <div ng-repeat="tool in panel.tools" class="control_tool"  ng-click="tool.clickTool()" ng-attr-id="{{tool.isSelected ? 'control_tool_used' : '' }}" >
+    <div ng-repeat="tool in panel.tools" class="control_tool"  ng-click="panel.selectTool(tool)" ng-attr-id="{{panel.isSelected(tool) ? 'control_tool_used' : '' }}" >
         <div class="control_tool_ico"><i class="fa fa-circle"></i></div> <div class="control_tool_title"><p>{{tool.name}}</p></div>
     </div>
 
 
     <div id="control_melange">
 
-        <div class="melange_color">
+        <div class="melange_color" ng-click="panel.selectPrimaryColor()" style="background-color: #{{panel.primaryColor}}">
             &nbsp;
         </div>
 
-        <div class="melange_color">
+        <div class="melange_color" ng-click="panel.selectSecondaryColor()" style="background-color: #{{panel.secondaryColor}}">
             &nbsp;
         </div>
     </div>
+
+
+
+    <div id="popup_colorPicker" class="popup_block">
+
+        <h2 class="popup_title">{{panel.popupColor_name}}</h2>
+
+        <span class="cp-basic" style="display: inline-block; vertical-align: top;">
+        </span>
+
+        <div class="close_popup" ng-click="panel.closePopupColor()">{{panel.popupColor_btnValid}}</div>
+    </div>
+
 
 </div>

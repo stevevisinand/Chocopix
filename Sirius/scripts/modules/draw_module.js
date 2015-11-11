@@ -15,9 +15,15 @@ var drawModule = angular.module('drawModule', []);
 drawModule.factory('drawUtils', function() {
     var drawModule = {};
 
+
+    //public value
+    drawModule.primaryColor = "FF0000";
+    drawModule.secondaryColor = "FF0000";
+
     //
     // private values
     //
+
 
     //canvas
     canvas = document.getElementById('draw');
@@ -27,11 +33,16 @@ drawModule.factory('drawUtils', function() {
     //draw
     var drawZone = new Draw(context, 10, 10, 500, 500);
 
-    //default values
-    var drawBrush = new SimpleDotBrush(context, 2, "#FF0000", 1.0, false);
-    var eraserBrush = new SimpleDotBrush(context, 10, "#FF0000", 1.0, true);
+    //default tools
+    var drawBrush = new SimpleDotBrush(context, 2, drawModule.primaryColor, 1.0, false);
+    var eraserBrush = new SimpleDotBrush(context, 10, drawModule.primaryColor, 1.0, true);
 
-    var pen = new Pencil(context, drawBrush);
+    var pen = new Pencil(context, "Pinceau", drawBrush);
+    var eraser = new Pencil(context, "Gomme", eraserBrush);
+
+
+    // tool selected
+    var selectedTool = pen;
 
     //use to detect the mouse click
     var pressed = false;
@@ -69,7 +80,7 @@ drawModule.factory('drawUtils', function() {
         //console.log(message);
 
         if(pressed) {
-            pen.addPoint(mousePos.x, mousePos.y);
+            selectedTool.addPoint(mousePos.x, mousePos.y);
         }
 
     }, false);
@@ -84,7 +95,7 @@ drawModule.factory('drawUtils', function() {
         //console.log(message);
 
 
-        pen.addPoint(mousePos.x, mousePos.y);
+        selectedTool.addPoint(mousePos.x, mousePos.y);
         pressed = true;
 
     }, false);
@@ -99,59 +110,43 @@ drawModule.factory('drawUtils', function() {
 
 
         pressed = false;
-        pen.end();
+        selectedTool.end();
         drawZone.save();
         clearCanvas();
         drawZone.drawMe();
 
     }, false);
 
-
-
-
     //
     // public values
     //
 
-    //tools are the available tools
+    //the available tools
     drawModule.tools = [];
+    drawModule.tools.push(pen);
+    drawModule.tools.push(eraser);
 
-    /**
-     * a pannelTool contain the informations to show the tools in the pannel
-     * @param name : name of the tool
-     * @param tool : the tool
-     * @param isSelected : if it is currently in use
-     * @param fctClick : function to activate when click on it
-     */
-    var pannelTool = function (name, tool, isSelected, fctClick) {
-        this.name = name;
-        this.tool = tool;
-        this.isSelected = isSelected; //Draw per px
 
-        this.clickTool = fctClick;
+    drawModule.selectTool = function (atool){
+        selectedTool = atool;
     };
 
-    /**
-     * Unselect all tools in drawModule.tools
-     */
-    function unselectAlltools(){
-        drawModule.tools.forEach(function(tool) {
-            tool.isSelected = false;
-        });
-    }
+    drawModule.isSelected = function (atool){
+        return Object.is(atool, selectedTool);
+    };
 
-    //Create the pannel
-    drawModule.tools.push(new pannelTool("Pinceau", drawBrush, true, function(){
-        unselectAlltools();
-        this.isSelected = true;
-        pen.setBrush(this.tool);
-    }));
+    drawModule.setPrimaryColor = function (colorRGB){
+        this.primaryColor = colorRGB;
 
-    drawModule.tools.push(new pannelTool("Gomme", eraserBrush, false, function(){
-        unselectAlltools();
-        this.isSelected = true;
-        pen.setBrush(this.tool);
-    }));
+        if(Object.is(selectedTool, pen)){
+            pen.getBrush().setRvbColor(colorRGB);
+        }
+        else if(Object.is(selectedTool, eraser)){
+            //eraser.getBrush().setRvbColor(colorRGB);
+        }
+
+    };
+
 
     /**
      * Main draw function, call it when redrawing scene is necessary
@@ -161,8 +156,6 @@ drawModule.factory('drawUtils', function() {
             drawZone.drawMe();
         }
     };
-
-
 
 
     return drawModule;

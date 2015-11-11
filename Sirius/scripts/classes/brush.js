@@ -28,6 +28,10 @@ var Brush = function(ctx, size, rvbColor, opacity, eraserMode){
     this.eraserMode = eraserMode;
 };
 
+Brush.prototype.setRvbColor = function(rvbColor){
+    this.rvbColor = rvbColor;
+};
+
 /**
  * draw the brush at pos
  * @param x : x Pos
@@ -74,7 +78,7 @@ SimpleDotBrush.prototype.drawBrush = function(x, y){
     }
 
     this.ctx.beginPath();
-    this.ctx.fillStyle=this.rvbColor;
+    this.ctx.fillStyle= "#"+this.rvbColor;
     this.ctx.arc(x, y, this.size, 0, 2 * Math.PI);
     this.ctx.fill();
 };

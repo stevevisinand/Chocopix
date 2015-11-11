@@ -14,10 +14,28 @@
  * @param ctx
  * @constructor
  */
-var Tool = function(ctx){
+var Tool = function(ctx, name){
 
     this.ctx = ctx;
+    this.name = name;
 };
+
+/**
+ * Add a point
+ * @param x : Coord X on canvas of point to add
+ * @param y : Coord Y on canvas of point to add
+ */
+Tool.prototype.addPoint = function(x, y){
+    throw new Error("Can't use an abstract class!");
+};
+
+/**
+ * Call this to end the line
+ */
+Tool.prototype.end = function(){
+    throw new Error("Can't use an abstract class!");
+};
+
 
 
 
@@ -26,12 +44,12 @@ var Tool = function(ctx){
  * @param ctx : canvas context
  * @constructor
  */
-var Pencil = function (ctx, brush) {
+var Pencil = function (ctx, name, brush) {
 
     // Invoke the superclass constructor on the new object
     // then use .call() to invoke the constructor as a method of
     // the object to be initialized.
-    Tool.call(this, ctx);
+    Tool.call(this, ctx, name);
 
     this.line = [];
     this.distPt = 0;
@@ -45,6 +63,13 @@ Pencil.prototype = Object.create( Tool.prototype );
  */
 Pencil.prototype.setBrush = function(brush) {
     this.brush = brush;
+};
+
+/**
+ * Get the brush
+ */
+Pencil.prototype.getBrush = function() {
+    return this.brush;
 };
 
 /**

@@ -19,12 +19,32 @@
         <!--------------------Scripts---------------------->
         <!--CDN-->
         <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>-->
-        
-        
+
         <!--LOCAL-->
         <script type="text/javascript" src="scripts/framework/angular.min.js"></script>
         
         <script type="text/javascript" src="scripts/framework/jquery-1.11.3.min.js"></script>
+
+
+
+        <!-- -->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>
+        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css"/>
+
+        <script src="plugins/colorpicker/jquery.colorpicker.js"></script>
+        <link href="plugins/colorpicker/jquery.colorpicker.css" rel="stylesheet" type="text/css"/>
+        <script src="plugins/colorpicker/i18n/jquery.ui.colorpicker-nl.js"></script>
+        <script src="plugins/colorpicker/swatches/jquery.ui.colorpicker-pantone.js"></script>
+        <script src="plugins/colorpicker/swatches/jquery.ui.colorpicker-crayola.js"></script>
+        <script src="plugins/colorpicker/swatches/jquery.ui.colorpicker-ral-classic.js"></script>
+        <script src="plugins/colorpicker/swatches/jquery.ui.colorpicker-x11.js"></script>
+        <script src="plugins/colorpicker/parts/jquery.ui.colorpicker-rgbslider.js"></script>
+        <script src="plugins/colorpicker/parts/jquery.ui.colorpicker-memory.js"></script>
+        <script src="plugins/colorpicker/parts/jquery.ui.colorpicker-swatchesswitcher.js"></script>
+        <script src="plugins/colorpicker/parsers/jquery.ui.colorpicker-cmyk-parser.js"></script>
+        <script src="plugins/colorpicker/parsers/jquery.ui.colorpicker-cmyk-percentage-parser.js"></script>
+
 
 
         <!-- AngularJS : Controler -->
@@ -39,6 +59,9 @@
         <script type="text/javascript" src="scripts/classes/draw.js"></script>
 
 
+        <!-- Plugin -->
+        <!--<script type="text/javascript" src="plugins/minicolors/bower_components/jquery-minicolors/jquery.minicolors.js"></script>-->
+
         <!------------------------------------------------->
         <!------------------------------------------------->
         
@@ -50,6 +73,10 @@
         
         <!--CDN-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+        <!-- Plugin -->
+        <link rel="stylesheet" type="text/css" href="plugins/minicolors/bower_components/jquery-minicolors/jquery.minicolors.css">
+
         <!------------------------------------------------->
         <!------------------------------------------------->
 
@@ -64,6 +91,6 @@
             <div id="drawing_zone">
                 <canvas id="draw" ng-controller="DrawZoneCtrl"></canvas>
             </div>
-      
+
     </body>
 </html>
