@@ -129,6 +129,7 @@ drawModule.factory('drawUtils', function() {
 
     drawModule.selectTool = function (atool){
         selectedTool = atool;
+        callAbonned();
     };
 
     drawModule.isSelected = function (atool){
@@ -147,6 +148,54 @@ drawModule.factory('drawUtils', function() {
 
     };
 
+    drawModule.isPenSelected = function(){
+        return (selectedTool instanceof Pencil);
+    };
+
+    drawModule.getBrushSelectedTool = function(){
+        if (selectedTool instanceof Pencil){
+            return selectedTool.getBrush();
+        }
+        else{
+            throw new Error("No pencil selected");
+        }
+    };
+    drawModule.setBrushSelectedTool = function(brush){
+        if (selectedTool instanceof Pencil){
+            selectedTool.setBrush(brush);
+        }
+        else{
+            throw new Error("No pencil selected");
+        }
+    };
+
+    drawModule.getDensitySelectedTool = function(){
+        if (selectedTool instanceof Pencil){
+            return selectedTool.getDensity();
+        }
+        else{
+            throw new Error("No pencil selected");
+        }
+    };
+    drawModule.setDensitySelectedTool = function(density){
+        if (selectedTool instanceof Pencil){
+            selectedTool.setDensity(density);
+        }
+        else{
+            throw new Error("No pencil selected");
+        }
+    };
+
+
+    var abonnedFcts = [];
+    var callAbonned = function(){
+        for(var i=0;i<abonnedFcts.length; i++){
+            abonnedFcts[i]();
+        }
+    }
+    drawModule.abonementCallbackChangeTool = function (fct){
+        abonnedFcts.push(fct);
+    }
 
     /**
      * Main draw function, call it when redrawing scene is necessary

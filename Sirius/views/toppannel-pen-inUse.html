@@ -1,0 +1,34 @@
+<!--        ____________ _____   				           -->
+<!--       /            \    /   				           -->
+<!--      /     _________\  /					           -->
+<!--      \     \          /					           -->
+<!--       \     \        /	 Steve Visinand		           -->
+<!--        \     \      /   17.11.15			           -->
+<!--   ______\     \    /	 index.html		               -->
+<!--  /             \  /	                    		   -->
+<!-- /_______________\/		            				   -->
+<!--                                                       -->
+<!--                                                 -->
+
+<div id="control_tool_inUse" ng-show="paneltop.isShowed()">
+
+    <div id="control_tool_inUse_title" class="control_tool_inUse_box">
+        <h1>{{paneltop.control_name}}</h1>
+    </div>
+
+    <div class="control_tool_inUse_box">
+        <label for="sizeBrush">{{paneltop.control_brush_sizeName}}</label>
+        <input id="sizeBrush" class="numberinput" type="number" value="42" ng-model="paneltop.sizeBrush" ng-change="paneltop.changeSizeBrush()"/>
+        <p class="unit">px</p>
+    </div>
+
+    <div class="control_tool_inUse_box">
+        <label for="densityBrush">{{paneltop.control_brush_densityName}}</label>
+        <input id="densityBrush" class="numberinput" type="number" value="42" ng-model="paneltop.density" ng-change="paneltop.changeDensity()"/>
+        <p class="unit">px</p>
+    </div>
+
+    <div class="control_tool_inUse_box">
+        <button class="buttoninput">{{paneltop.control_brush_btnChangeBrush}}</button>
+    </div>
+</div>

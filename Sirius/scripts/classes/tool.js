@@ -58,6 +58,15 @@ var Pencil = function (ctx, name, brush) {
 };
 Pencil.prototype = Object.create( Tool.prototype );
 
+
+Pencil.prototype.setDensity = function(density) {
+    this.density = density;
+};
+
+Pencil.prototype.getDensity = function() {
+    return this.density;
+};
+
 /**
  * Set a new brush to the tool
  */

@@ -62,6 +62,8 @@ header#head{
     -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.8);
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.8);
 
+    z-index: 50;
+
 
     background-image: url(http://www.transparenttextures.com/patterns/absurdity.png);
     /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
@@ -166,6 +168,9 @@ header #head_logo p{
     -ms-transition: background 0.2s linear;
     -o-transition: background 0.2s linear;
     transition: background 0.2s linear;
+    z-index: 40;
+
+    position: relative;
 }
 
 #control_tool_used{
@@ -281,6 +286,85 @@ header #head_logo p{
 
 
 
+/**Control tool in use**/
+#control_tool_inUse{
+    background-color: #0089B2;
+    height: 50px;
+
+
+    z-index: 45;
+    position: relative;
+    
+    border-color: #3A3939;
+    border-width: 1px;
+    border-bottom-style: dashed;
+}
+#control_tool_inUse_title{
+    width: 223px;
+
+    padding-left: 10px;
+}
+#control_tool_inUse_title h1{
+    color: white;
+    line-height: 30px;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+    font-weight: lighter;
+}
+.control_tool_inUse_box{
+    vertical-align: top;
+    overflow: hidden;
+
+    display: inline-block;
+    height: 30px;
+    margin: 10px;
+    margin-left: 0px;
+    margin-right: 0px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+
+    border-color: #3A3939;
+    border-width: 1px;
+    border-right-style: dashed;
+}
+.control_tool_inUse_box p{
+    color: white;
+    margin:0;
+    padding:0;
+
+}
+.control_tool_inUse_box, .control_tool_inUse_box label{
+    color:white;
+    font-family: Roboto, sans-serif;
+    font-weight: lighter;
+}
+.control_tool_inUse_box label{
+
+     line-height: 30px;
+     vertical-align: middle;
+ }
+
+.control_tool_inUse_box .unit{
+    display: inline-block;
+    line-height: 30px;
+    vertical-align: middle;
+    color:white;
+    font-family: Roboto, sans-serif;
+}
+.control_tool_inUse_box .numberinput{
+    width: 100px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+.control_tool_inUse_box .buttoninput{
+    width: 100px;
+    margin-right: 5px;
+    margin-left: 5px;
+
+}
 /**POPUP**/
 
 #fade {

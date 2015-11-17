@@ -28,6 +28,14 @@ var Brush = function(ctx, size, rvbColor, opacity, eraserMode){
     this.eraserMode = eraserMode;
 };
 
+Brush.prototype.setSize = function(size){
+    this.size = size;
+};
+
+Brush.prototype.getSize = function(){
+    return this.size;
+};
+
 Brush.prototype.setRvbColor = function(rvbColor){
     this.rvbColor = rvbColor;
 };

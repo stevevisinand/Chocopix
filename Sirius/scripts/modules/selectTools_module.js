@@ -12,12 +12,7 @@
 (function() {
     
     var appModule = angular.module('selectTools-directives', ['resizeModule', 'drawModule']);
-    
-    //====================================================================
-    //====================================================================
-    //========================DRAW TOOLS DIRECT===========================
-    //==== left pannel infos, buttons listeners                       ====
-    //====================================================================
+
 
     appModule.directive("drawtoolspannel", function(resizeUtils, drawUtils) {
       return {
@@ -79,8 +74,9 @@
             };
 
 
+
             //
-            //	Ferme toutes les popup
+            //	Close all popups
             //
             this.closePopupColor = function(){
 
@@ -128,6 +124,50 @@
         },
         controllerAs: "panel"
       };
+    });
+
+
+    appModule.directive("toppenpannel", function(drawUtils) {
+        return {
+            restrict: "E",
+            templateUrl: "views/toppannel-pen-inUse.html",
+            controller: function($scope, drawUtils) {
+
+                //strings values
+                this.control_name = "Paramètres de dessin"
+                this.control_brush_sizeName = "taille : ";
+                this.control_brush_densityName = "densité : ";
+                this.control_brush_btnChangeBrush = "Choisir une brosse";
+
+
+                this.sizeBrush = 0;
+                this.density = 0;
+
+                var ctrl = this;
+                this.loadPencil = function(){
+                    ctrl.sizeBrush = drawUtils.getBrushSelectedTool().getSize();
+                    ctrl.density = drawUtils.getDensitySelectedTool();
+                }
+
+                drawUtils.abonementCallbackChangeTool(this.loadPencil);
+                this.loadPencil();
+
+                this.changeSizeBrush = function(){
+                    var brush = drawUtils.getBrushSelectedTool();
+                    brush.setSize(parseInt(this.sizeBrush));
+                };
+
+                this.changeDensity = function(){
+                    drawUtils.setDensitySelectedTool(this.density);
+                }
+
+                this.isShowed = function(){
+                    return drawUtils.isPenSelected();
+                };
+
+            },
+            controllerAs: "paneltop"
+        };
     });
 
 })();
