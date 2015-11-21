@@ -18,10 +18,10 @@
       return {
         restrict: "E",
         templateUrl: "views/leftpannel-tools.html",
-        controller: function($scope, resizeUtils, drawUtils) {
+        controller: function($scope, $sce, resizeUtils, drawUtils) {
 
             //Strings values
-            this.name = "Control";
+            this.name = "Outils";
 
             this.popupColor_name = "Mélangeur";
             this.popupColor_btnValid = "Confirmer";
@@ -37,6 +37,7 @@
 
             this.tools = [];
             this.tools = this.tools.concat(drawUtils.tools);
+
 
 
             this.changeColor = function(colorRGB){
@@ -68,11 +69,11 @@
                 //redifine function
                 this.changeColor = function(colorRGB){
                     this.secondaryColor = colorRGB;
+                    drawUtils.setSecondaryColor(colorRGB);
                 };
 
                 showPopup('popup_colorPicker', 500);
             };
-
 
 
             //
@@ -145,8 +146,10 @@
 
                 var ctrl = this;
                 this.loadPencil = function(){
-                    ctrl.sizeBrush = drawUtils.getBrushSelectedTool().getSize();
-                    ctrl.density = drawUtils.getDensitySelectedTool();
+                    if(drawUtils.isPenSelected()) {
+                        ctrl.sizeBrush = drawUtils.getBrushSelectedTool().getSize();
+                        ctrl.density = drawUtils.getDensitySelectedTool();
+                    }
                 }
 
                 drawUtils.abonementCallbackChangeTool(this.loadPencil);
@@ -167,6 +170,60 @@
 
             },
             controllerAs: "paneltop"
+        };
+    });
+
+    appModule.directive("topshapepannel", function(drawUtils) {
+        return {
+            restrict: "E",
+            templateUrl: "views/toppannel-shape-inUse.html",
+            controller: function($scope, drawUtils) {
+
+                //strings values
+                this.control_name = "Paramètres de formes";
+                this.control_shape_isstroked = "contours";
+                this.control_shape_isfilled = "remplis";
+                this.control_shape_sizestroke = "taille du trait : ";
+
+
+                //binded values
+                this.sizestroke = 0;
+                this.isFilled = true;
+                this.isStroked = true;
+
+
+                //abo to callback
+                var ctrl = this;
+                this.loadShape = function(){
+                    if(drawUtils.isShapeSelected()) {
+                        ctrl.sizestroke = drawUtils.getSizeStokeSelectedTool();
+                        ctrl.isFilled = drawUtils.getIsFillSelectedTool();
+                        ctrl.isStroked = drawUtils.getIsStokeSelectedTool();
+                    }
+                }
+                drawUtils.abonementCallbackChangeTool(this.loadShape);
+
+
+
+
+                //functions
+                this.changeSizestroke = function(){
+                    drawUtils.setSizeStokeSelectedTool(this.sizestroke);
+                };
+
+                this.changeIsFilled = function(){
+                    drawUtils.setIsFillSelectedTool(this.isFilled);
+                };
+                this.changeIsStroked = function(){
+                    drawUtils.setIsStokeSelectedTool(this.isStroked);
+                };
+
+                this.isShowed = function(){
+                    return drawUtils.isShapeSelected();
+                };
+
+            },
+            controllerAs: "paneltopshape"
         };
     });
 

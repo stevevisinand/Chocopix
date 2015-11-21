@@ -12,23 +12,31 @@
 var drawModule = angular.module('drawModule', []);
 
 
-drawModule.factory('drawUtils', function() {
+drawModule.factory('drawUtils', function($sce) { //$SCE to sanitize
     var drawModule = {};
 
-
-    //public value
-    drawModule.primaryColor = "FF0000";
-    drawModule.secondaryColor = "FF0000";
 
     //
     // private values
     //
 
-
     //canvas
     canvas = document.getElementById('draw');
     context = canvas.getContext('2d');
 
+
+    //public value
+    drawModule.primaryColor = "FF0000";
+    drawModule.secondaryColor = "00FF00";
+
+    /**
+     * Main draw function, call it when redrawing scene is necessary
+     */
+    drawModule.draw = function(){
+        if (canvas.getContext) {
+            drawZone.drawMe();
+        }
+    };
 
     //draw
     var drawZone = new Draw(context, 10, 10, 500, 500);
@@ -37,8 +45,15 @@ drawModule.factory('drawUtils', function() {
     var drawBrush = new SimpleDotBrush(context, 2, drawModule.primaryColor, 1.0, false);
     var eraserBrush = new SimpleDotBrush(context, 10, drawModule.primaryColor, 1.0, true);
 
-    var pen = new Pencil(context, "Pinceau", drawBrush);
-    var eraser = new Pencil(context, "Gomme", eraserBrush);
+    var pen = new Pencil(context, "Pinceau", $sce.trustAsHtml('<i class="fa fa-paint-brush"></i>'),
+        drawBrush);
+    var eraser = new Pencil(context, "Gomme", $sce.trustAsHtml('<i class="fa fa-eraser"></i>'),
+        eraserBrush);
+
+    var rectangle = new Rectangle(context, "Rectangle", $sce.trustAsHtml('<i class="fa fa-square-o"></i>'),
+        drawModule.primaryColor, drawModule.secondaryColor, 2, true, true, drawModule.draw);
+    var oval = new Oval(context, "Elipse", $sce.trustAsHtml('<i class="fa fa-circle-o"></i>'),
+        drawModule.primaryColor, drawModule.secondaryColor, 2, true, true, drawModule.draw);
 
 
     // tool selected
@@ -125,6 +140,9 @@ drawModule.factory('drawUtils', function() {
     drawModule.tools = [];
     drawModule.tools.push(pen);
     drawModule.tools.push(eraser);
+    drawModule.tools.push(rectangle);
+    drawModule.tools.push(oval);
+
 
 
     drawModule.selectTool = function (atool){
@@ -139,17 +157,23 @@ drawModule.factory('drawUtils', function() {
     drawModule.setPrimaryColor = function (colorRGB){
         this.primaryColor = colorRGB;
 
-        if(Object.is(selectedTool, pen)){
-            pen.getBrush().setRvbColor(colorRGB);
-        }
-        else if(Object.is(selectedTool, eraser)){
-            //eraser.getBrush().setRvbColor(colorRGB);
-        }
+        pen.getBrush().setRvbColor(colorRGB);
+        rectangle.strokeColor = colorRGB;
 
+    };
+
+    drawModule.setSecondaryColor = function(colorRGB){
+        this.secondaryColor = colorRGB;
+
+        rectangle.fillColor = colorRGB;
     };
 
     drawModule.isPenSelected = function(){
         return (selectedTool instanceof Pencil);
+    };
+
+    drawModule.isShapeSelected = function(){
+        return (selectedTool instanceof Shape);
     };
 
     drawModule.getBrushSelectedTool = function(){
@@ -186,6 +210,64 @@ drawModule.factory('drawUtils', function() {
         }
     };
 
+    drawModule.setSizeStokeSelectedTool = function(size){
+
+        if(selectedTool instanceof  Shape){
+            selectedTool.lineWidth = size;
+        }
+        else{
+            throw new Error("No shape selected");
+        }
+    };
+    drawModule.getSizeStokeSelectedTool = function(){
+
+        if(selectedTool instanceof  Shape){
+            return selectedTool.lineWidth;
+        }
+        else{
+            throw new Error("No shape selected");
+        }
+    };
+
+    drawModule.setIsStokeSelectedTool = function(is){
+
+        if(selectedTool instanceof  Shape){
+            selectedTool.stroked = is;
+        }
+        else{
+            throw new Error("No shape selected");
+        }
+    };
+    drawModule.getIsStokeSelectedTool = function(){
+
+        if(selectedTool instanceof  Shape){
+            return selectedTool.stroked;
+        }
+        else{
+            throw new Error("No shape selected");
+        }
+    };
+    drawModule.setIsFillSelectedTool = function(is){
+
+        if(selectedTool instanceof  Shape){
+            selectedTool.filled = is;
+        }
+        else{
+            throw new Error("No shape selected");
+        }
+    };
+    drawModule.getIsFillSelectedTool = function(){
+
+        if(selectedTool instanceof  Shape){
+            return selectedTool.filled;
+        }
+        else{
+            throw new Error("No shape selected");
+        }
+    };
+
+
+
 
     var abonnedFcts = [];
     var callAbonned = function(){
@@ -197,14 +279,7 @@ drawModule.factory('drawUtils', function() {
         abonnedFcts.push(fct);
     }
 
-    /**
-     * Main draw function, call it when redrawing scene is necessary
-     */
-    drawModule.draw = function(){
-        if (canvas.getContext) {
-            drawZone.drawMe();
-        }
-    };
+
 
 
     return drawModule;

@@ -32,7 +32,7 @@ drawModule.factory('resizeUtils', function(drawUtils) {
      */
     resizeModule.resizeApp = function(w, h){
 
-        var h = h - $('#head').height() - 4; //border = 4px
+        var h = h - $('#head').height() - 5 - $('#control_tool_inUse').height(); //border = 5px
         var left_pannels = $('.left_pannel');
 
         var widthPannels = 0;

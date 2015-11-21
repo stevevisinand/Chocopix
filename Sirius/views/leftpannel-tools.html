@@ -35,7 +35,7 @@
 
 
     <div ng-repeat="tool in panel.tools" class="control_tool"  ng-click="panel.selectTool(tool)" ng-attr-id="{{panel.isSelected(tool) ? 'control_tool_used' : '' }}" >
-        <div class="control_tool_ico"><i class="fa fa-circle"></i></div> <div class="control_tool_title"><p>{{tool.name}}</p></div>
+        <div class="control_tool_ico" ng-bind-html="tool.ico"></div> <div class="control_tool_title"><p>{{tool.name}}</p></div>
     </div>
 
 

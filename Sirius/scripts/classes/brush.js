@@ -89,4 +89,7 @@ SimpleDotBrush.prototype.drawBrush = function(x, y){
     this.ctx.fillStyle= "#"+this.rvbColor;
     this.ctx.arc(x, y, this.size, 0, 2 * Math.PI);
     this.ctx.fill();
+
+    //come back to default
+    this.ctx.globalCompositeOperation = "source-over";
 };

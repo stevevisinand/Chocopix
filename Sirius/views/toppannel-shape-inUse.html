@@ -1,0 +1,32 @@
+<!--        ____________ _____   				           -->
+<!--       /            \    /   				           -->
+<!--      /     _________\  /					           -->
+<!--      \     \          /					           -->
+<!--       \     \        /	 Steve Visinand		           -->
+<!--        \     \      /   17.11.15			           -->
+<!--   ______\     \    /	 index.html		               -->
+<!--  /             \  /	                    		   -->
+<!-- /_______________\/		            				   -->
+<!--                                                       -->
+<!--                                                 -->
+
+<div id="control_tool_inUse" ng-show="paneltopshape.isShowed()">
+
+    <div id="control_tool_inUse_title" class="control_tool_inUse_box">
+        <h1>{{paneltopshape.control_name}}</h1>
+    </div>
+
+    <div class="control_tool_inUse_box">
+        <input id="ckboxFill" type="checkbox" name="fill" value="filled" ng-model="paneltopshape.isFilled" ng-change="paneltopshape.changeIsFilled()">
+        <label for="ckboxFill">{{paneltopshape.control_shape_isfilled}}</label>
+        <input id="ckboxStroke" type="checkbox" name="stroke" value="strocked" ng-model="paneltopshape.isStroked" ng-change="paneltopshape.changeIsStroked()">
+        <label for="ckboxStroke">{{paneltopshape.control_shape_isstroked}}</label>
+    </div>
+
+    <div class="control_tool_inUse_box" ng-show="paneltopshape.isStroked">
+        <label for="sizeStroke">{{paneltopshape.control_shape_sizestroke}}</label>
+        <input id="sizeStroke" class="numberinput" type="number" value="42" ng-model="paneltopshape.sizestroke" ng-change="paneltopshape.changeSizestroke()"/>
+        <p class="unit">px</p>
+    </div>
+
+</div>
