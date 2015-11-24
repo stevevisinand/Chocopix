@@ -52,7 +52,7 @@ drawModule.factory('drawUtils', function($sce) { //$SCE to sanitize
 
     var rectangle = new Rectangle(context, "Rectangle", $sce.trustAsHtml('<i class="fa fa-square-o"></i>'),
         drawModule.primaryColor, drawModule.secondaryColor, 2, true, true, drawModule.draw);
-    var oval = new Oval(context, "Elipse", $sce.trustAsHtml('<i class="fa fa-circle-o"></i>'),
+    var oval = new Oval(context, "Ellipse", $sce.trustAsHtml('<i class="fa fa-circle-o"></i>'),
         drawModule.primaryColor, drawModule.secondaryColor, 2, true, true, drawModule.draw);
 
 
@@ -159,13 +159,14 @@ drawModule.factory('drawUtils', function($sce) { //$SCE to sanitize
 
         pen.getBrush().setRvbColor(colorRGB);
         rectangle.strokeColor = colorRGB;
-
+        oval.strokeColor = colorRGB;
     };
 
     drawModule.setSecondaryColor = function(colorRGB){
         this.secondaryColor = colorRGB;
 
         rectangle.fillColor = colorRGB;
+        oval.fillColor = colorRGB;
     };
 
     drawModule.isPenSelected = function(){
@@ -266,6 +267,9 @@ drawModule.factory('drawUtils', function($sce) { //$SCE to sanitize
         }
     };
 
+    drawModule.selectColorOnCanvas = function(fct){
+        selectedTool = new Colorpick(context, fct, drawZone.width, drawZone.height);
+    };
 
 
 

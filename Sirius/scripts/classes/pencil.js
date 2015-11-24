@@ -72,7 +72,7 @@ Pencil.prototype.addPoint = function (x,y) {
         var p0 = this.line[this.line.length-1];
 
         this.distPt += Math.sqrt(Math.pow(p1.x-p0.x, 2)+ Math.pow(p1.y-p0.y, 2));
-        console.log("distPts : " + this.distPt);
+        //console.log("distPts : " + this.distPt);
 
         if(this.distPt >= this.density){
 

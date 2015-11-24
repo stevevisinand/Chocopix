@@ -38,11 +38,12 @@
             this.tools = [];
             this.tools = this.tools.concat(drawUtils.tools);
 
-
-
+            var ref = this;
             this.changeColor = function(colorRGB){
-                this.primaryColor = colorRGB;
+                ref.primaryColor = colorRGB;
                 drawUtils.setPrimaryColor(colorRGB);
+
+                $scope.$apply(); //force to reload scope (data-binding), because changeColor is called out of angularJS
             };
 
             //Start picker
@@ -57,9 +58,11 @@
 
             this.selectPrimaryColor = function() {
                 //redefine function
-                this.changeColor = function(colorRGB){
-                    this.primaryColor = colorRGB;
+                ref.changeColor = function(colorRGB){
+                    ref.primaryColor = colorRGB; //ref = this
                     drawUtils.setPrimaryColor(colorRGB);
+
+                    $scope.$apply();
                 };
 
                 showPopup('popup_colorPicker', 500);
@@ -67,12 +70,20 @@
 
             this.selectSecondaryColor = function() {
                 //redifine function
-                this.changeColor = function(colorRGB){
-                    this.secondaryColor = colorRGB;
+                ref.changeColor = function(colorRGB){
+                    ref.secondaryColor = colorRGB; //ref = this
                     drawUtils.setSecondaryColor(colorRGB);
+
+                    $scope.$apply();
                 };
 
                 showPopup('popup_colorPicker', 500);
+            };
+
+            this.startColorPicker = function(){
+                this.closePopupColor();
+
+                drawUtils.selectColorOnCanvas(this.changeColor);
             };
 
 
