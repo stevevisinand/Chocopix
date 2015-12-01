@@ -1,104 +1,95 @@
-<!--        ____________ _____   				           -->
-<!--       /            \    /   				           -->
-<!--      /     _________\  /					           -->
-<!--      \     \          /					           -->
-<!--       \     \        /	 Steve Visinand		           -->
-<!--        \     \      /   26.10.15			           -->
-<!--   ______\     \    /	 index.html		               -->
-<!--  /             \  /	 "Main page"		           -->
-<!-- /_______________\/							           -->
-
-
 <!doctype html>
-<html ng-app="Drawer">
-    <head>
-        <meta charset="UTF-8">
-        <title>Pixel Papaye</title>
-
-        <!------------------------------------------------->
-        <!--------------------Scripts---------------------->
-        <!--CDN-->
-        <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>-->
-
-        <!--LOCAL-->
-        <script type="text/javascript" src="scripts/framework/angular.min.js"></script>
-        
-        <script type="text/javascript" src="scripts/framework/jquery-1.11.3.min.js"></script>
-
-
-
-        <!-- -->
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>
-        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css"/>
-
-        <script src="plugins/colorpicker/jquery.colorpicker.js"></script>
-        <link href="plugins/colorpicker/jquery.colorpicker.css" rel="stylesheet" type="text/css"/>
-        <script src="plugins/colorpicker/i18n/jquery.ui.colorpicker-nl.js"></script>
-        <script src="plugins/colorpicker/swatches/jquery.ui.colorpicker-pantone.js"></script>
-        <script src="plugins/colorpicker/swatches/jquery.ui.colorpicker-crayola.js"></script>
-        <script src="plugins/colorpicker/swatches/jquery.ui.colorpicker-ral-classic.js"></script>
-        <script src="plugins/colorpicker/swatches/jquery.ui.colorpicker-x11.js"></script>
-        <script src="plugins/colorpicker/parts/jquery.ui.colorpicker-rgbslider.js"></script>
-        <script src="plugins/colorpicker/parts/jquery.ui.colorpicker-memory.js"></script>
-        <script src="plugins/colorpicker/parts/jquery.ui.colorpicker-swatchesswitcher.js"></script>
-        <script src="plugins/colorpicker/parsers/jquery.ui.colorpicker-cmyk-parser.js"></script>
-        <script src="plugins/colorpicker/parsers/jquery.ui.colorpicker-cmyk-percentage-parser.js"></script>
-
-
-
-        <!-- AngularJS : Controler -->
-        <script type="text/javascript" src="scripts/app.js"></script>
-        <script type="text/javascript" src="scripts/modules/selectTools_module.js"></script>
-        <script type="text/javascript" src="scripts/modules/draw_module.js"></script>
-        <script type="text/javascript" src="scripts/modules/resize_module.js"></script>
-
-        <!-- POO : Model -->
-        <script type="text/javascript" src="scripts/classes/tool.js"></script>
-        <script type="text/javascript" src="scripts/classes/shape.js"></script>
-        <script type="text/javascript" src="scripts/classes/pencil.js"></script>
-        <script type="text/javascript" src="scripts/classes/brush.js"></script>
-        <script type="text/javascript" src="scripts/classes/draw.js"></script>
-        <script type="text/javascript" src="scripts/classes/colorpick.js"></script>
-
-
-
-        <!-- Plugin -->
-        <!--<script type="text/javascript" src="plugins/minicolors/bower_components/jquery-minicolors/jquery.minicolors.js"></script>-->
-
-        <!------------------------------------------------->
-        <!------------------------------------------------->
-        
-        
-        <!------------------------------------------------->
-        <!---------------------Styles---------------------->
-        <!--LOCAL-->
-        <link rel="stylesheet" type="text/css" href="styles/styles.css">
-        
-        <!--CDN-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
-        <!-- Plugin -->
-        <link rel="stylesheet" type="text/css" href="plugins/minicolors/bower_components/jquery-minicolors/jquery.minicolors.css">
-
-        <!------------------------------------------------->
-        <!------------------------------------------------->
-
-    </head>
-    <body id="body" ng-controller="GlobalViewCtrl">
-        <header id="head">
-                <div id="head_logo"> <p>Pixel Papaye</p> </div>
-        </header>
-
-
-        <toppenpannel></toppenpannel>
-        <topshapepannel></topshapepannel>
-        <drawtoolspannel></drawtoolspannel>
-
-        <div id="drawing_zone">
-
-            <canvas id="draw" ng-controller="DrawZoneCtrl"></canvas>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pixel Papaye</title>
+    <link rel="stylesheet" href="styles/foundation.css" />
+    <link rel="stylesheet" href="styles/home.css" />
+      
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+     
+    <script type="text/javascript" src="scripts/framework/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="scripts/home.js"></script>
+    
+  </head>
+  <body>
+     <!-- 
+    <header id="head">
+        <div class="row">
+          <div class="large-12 columns">
+            <h1>Pixel Papaye</h1>
+          </div>
         </div>
+    </header>
+    -->
+      
+      
+    <div id="head_big">
+    <div class="row">
+      <div class="large-12 columns">
+        <div class="callout large">
 
-    </body>
+            <div class="row text-center" id="banniere-head">
+
+                    <h1 id="title-head">Pixel Papaye</h1>
+                    <a href="app.html" class="small button" id="btnTry">Try it !</a>
+                    <p id="descr-head">Online bitmap editor</p>
+            </div>
+            
+        </div>
+      </div>      
+    </div>
+    </div>
+      
+      
+      
+    <div class="row">
+        <div class="large-12 columns">
+        <div class="callout large">
+
+
+
+            <div class="row" id="content-center">
+                <div class="large-4 medium-4 columns text-center">
+                 
+                  <h3><i class="fa fa-check"></i> Easy to use</h3>
+                  <p>Don't spend hours and hours to learn a tool. Pixel papaya is simpler to use than eat a papaye ! </p>
+                </div>
+                <div class="large-4 medium-4 columns text-center">
+                  <h3><i class="fa fa-tachometer"></i> Powerful</h3>
+                  <p>Like the banana but with more orange, the papaye give you so much power to create and edit the pixels</p>
+                </div>
+                <div class="large-4 medium-4 columns text-center">
+                  <h3><i class="fa fa-cloud"></i> Accessible</h3>
+                  <p>Easy to access, Pixel papaya follow you on all your computers. You just need a browser !</p>
+                </div>
+            </div>
+            
+
+
+        </div>
+        </div>
+  </div>
+      
+  <div class="row">
+      <div class="medium-12 columns">
+          <hr />
+          <div class="medium-6 columns">
+            
+            <p>
+              &copy; Copyright - Steve Visinand
+            </p>
+
+          </div>
+          <div class="medium-6 columns text-right">
+            
+            <a href="http://stevevisinand.garagevisinand.ch/" class="small button">About</a>
+              
+          </div>
+      </div>
+    </div>
+
+</body>
 </html>

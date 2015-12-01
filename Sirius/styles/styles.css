@@ -65,7 +65,7 @@ header#head{
     z-index: 50;
 
 
-    background-image: url(http://www.transparenttextures.com/patterns/absurdity.png);
+    /*background-image: url(http://www.transparenttextures.com/patterns/absurdity.png);*/
     /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 header #head_logo{
@@ -417,6 +417,7 @@ header #head_logo p{
 .popup_title{
     text-align: center;
 }
+
 
 
 /**
