@@ -11,16 +11,16 @@
 /**
  * Brush abstract base class
  * @abstract
- * @param ctx : canvas context
+ * @param draw : contain canvas context
  * @param size : size of the brush
  * @param rvbColor : rvb brush color, format hex : "#FFFFFF"
  * @param opacity : opactiy of the brush
  * @param eraserMode : boolean value, erase of draw
  * @constructor
  */
-var Brush = function(ctx, size, rvbColor, opacity, eraserMode){
+var Brush = function(draw, size, rvbColor, opacity, eraserMode){
 
-    this.ctx = ctx;
+    this.draw = draw;
     this.size = size;
     this.rvbColor = rvbColor;
     this.opactiy = opacity;
@@ -61,12 +61,12 @@ Brush.prototype.drawBrush = function(x, y){
  * @param eraserMode : boolean value, erase of draw
  * @constructor
  */
-var SimpleDotBrush = function (ctx, size, rvbColor, opacity, eraserMode) {
+var SimpleDotBrush = function (draw, size, rvbColor, opacity, eraserMode) {
 
     // Invoke the superclass constructor on the new object
     // then use .call() to invoke the constructor as a method of
     // the object to be initialized.
-    Brush.call(this, ctx, size, rvbColor, opacity, eraserMode);
+    Brush.call(this, draw, size, rvbColor, opacity, eraserMode);
 
 };
 SimpleDotBrush.prototype = Object.create( Brush.prototype );
@@ -78,18 +78,19 @@ SimpleDotBrush.prototype = Object.create( Brush.prototype );
  */
 SimpleDotBrush.prototype.drawBrush = function(x, y){
 
+    var ctx = this.draw.getActualContext();
     if(this.eraserMode){
-        this.ctx.globalCompositeOperation = "destination-out";
+        ctx.globalCompositeOperation = "destination-out";
     }
     else{
-        this.ctx.globalCompositeOperation = "source-over";
+        ctx.globalCompositeOperation = "source-over";
     }
 
-    this.ctx.beginPath();
-    this.ctx.fillStyle= "#"+this.rvbColor;
-    this.ctx.arc(x, y, this.size, 0, 2 * Math.PI);
-    this.ctx.fill();
+    ctx.beginPath();
+    ctx.fillStyle= "#"+this.rvbColor;
+    ctx.arc(x, y, this.size, 0, 2 * Math.PI);
+    ctx.fill();
 
     //come back to default
-    this.ctx.globalCompositeOperation = "source-over";
+    ctx.globalCompositeOperation = "source-over";
 };

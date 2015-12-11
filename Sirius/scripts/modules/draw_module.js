@@ -20,9 +20,17 @@ drawModule.factory('drawUtils', function($sce) { //$SCE to sanitize
     // private values
     //
 
+    //draw
+    drawModule.drawZone = new Draw(10, 10, 500, 500);
+    drawModule.drawZone.addCalc();
+    drawModule.calcs = drawModule.drawZone.getCalcs();
+
+    //var w = $(window);
+    //resizeUtils.resizeApp(w.width(), w.height());
+
     //canvas
-    canvas = document.getElementById('draw');
-    context = canvas.getContext('2d');
+    canvas = drawModule.drawZone.getActualCanvas();
+    context = drawModule.drawZone.getActualContext();
 
 
     //public value
@@ -34,25 +42,22 @@ drawModule.factory('drawUtils', function($sce) { //$SCE to sanitize
      */
     drawModule.draw = function(){
         if (canvas.getContext) {
-            drawZone.drawMe();
+            drawModule.drawZone.drawMe();
         }
     };
 
-    //draw
-    var drawZone = new Draw(context, 10, 10, 500, 500);
 
     //default tools
-    var drawBrush = new SimpleDotBrush(context, 2, drawModule.primaryColor, 1.0, false);
-    var eraserBrush = new SimpleDotBrush(context, 10, drawModule.primaryColor, 1.0, true);
+    var drawBrush = new SimpleDotBrush(drawModule.drawZone, 2, drawModule.primaryColor, 1.0, false);
+    var eraserBrush = new SimpleDotBrush(drawModule.drawZone, 10, drawModule.primaryColor, 1.0, true);
 
-    var pen = new Pencil(context, "Pinceau", $sce.trustAsHtml('<i class="fa fa-paint-brush"></i>'),
+    var pen = new Pencil(drawModule.drawZone, "Pinceau", $sce.trustAsHtml('<i class="fa fa-paint-brush"></i>'),
         drawBrush);
-    var eraser = new Pencil(context, "Gomme", $sce.trustAsHtml('<i class="fa fa-eraser"></i>'),
+    var eraser = new Pencil(drawModule.drawZone, "Gomme", $sce.trustAsHtml('<i class="fa fa-eraser"></i>'),
         eraserBrush);
-
-    var rectangle = new Rectangle(context, "Rectangle", $sce.trustAsHtml('<i class="fa fa-square-o"></i>'),
+    var rectangle = new Rectangle(drawModule.drawZone, "Rectangle", $sce.trustAsHtml('<i class="fa fa-square-o"></i>'),
         drawModule.primaryColor, drawModule.secondaryColor, 2, true, true, drawModule.draw);
-    var oval = new Oval(context, "Ellipse", $sce.trustAsHtml('<i class="fa fa-circle-o"></i>'),
+    var oval = new Oval(drawModule.drawZone, "Ellipse", $sce.trustAsHtml('<i class="fa fa-circle-o"></i>'),
         drawModule.primaryColor, drawModule.secondaryColor, 2, true, true, drawModule.draw);
 
 
@@ -109,7 +114,6 @@ drawModule.factory('drawUtils', function($sce) { //$SCE to sanitize
         //var message = 'Mouse DOWN: ' + mousePos.x + ',' + mousePos.y;
         //console.log(message);
 
-
         selectedTool.addPoint(mousePos.x, mousePos.y);
         pressed = true;
 
@@ -126,9 +130,9 @@ drawModule.factory('drawUtils', function($sce) { //$SCE to sanitize
 
         pressed = false;
         selectedTool.end();
-        drawZone.save();
+        drawModule.drawZone.save();
         clearCanvas();
-        drawZone.drawMe();
+        drawModule.drawZone.drawMe();
 
     }, false);
 
@@ -142,7 +146,6 @@ drawModule.factory('drawUtils', function($sce) { //$SCE to sanitize
     drawModule.tools.push(eraser);
     drawModule.tools.push(rectangle);
     drawModule.tools.push(oval);
-
 
 
     drawModule.selectTool = function (atool){
@@ -268,7 +271,7 @@ drawModule.factory('drawUtils', function($sce) { //$SCE to sanitize
     };
 
     drawModule.selectColorOnCanvas = function(fct){
-        selectedTool = new Colorpick(context, fct, drawZone.width, drawZone.height);
+        selectedTool = new Colorpick(drawModule.drawZone.getActualContext(), fct, drawModule.drawZone.width, drawModule.drawZone.height);
     };
 
 
@@ -283,7 +286,11 @@ drawModule.factory('drawUtils', function($sce) { //$SCE to sanitize
         abonnedFcts.push(fct);
     }
 
-
+    drawModule.setActivCalc = function(calc){
+        drawModule.drawZone.setActivCalc(calc);
+        canvas = drawModule.drawZone.getActualCanvas();
+        context = drawModule.drawZone.getActualContext();
+    }
 
 
     return drawModule;

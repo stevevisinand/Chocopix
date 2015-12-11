@@ -9,12 +9,12 @@
 /*-- /_______________\/							            --*/
 
 
-var Shape = function (ctx, name, ico, strokeColor, fillColor, lineWidth, stroked, filled, clearFct) {
+var Shape = function (draw, name, ico, strokeColor, fillColor, lineWidth, stroked, filled, clearFct) {
 
     // Invoke the superclass constructor on the new object
     // then use .call() to invoke the constructor as a method of
     // the object to be initialized.
-    Tool.call(this, ctx, name, ico);
+    Tool.call(this, draw, name, ico);
 
     this.startPoint = null;
     this.lastPoint = null;
@@ -31,12 +31,12 @@ Shape.prototype = Object.create( Tool.prototype );
 
 
 
-var Rectangle = function (ctx, name, ico,strokeColor, fillColor, lineWidth, stroked, filled, clearFct) {
+var Rectangle = function (draw, name, ico,strokeColor, fillColor, lineWidth, stroked, filled, clearFct) {
 
     // Invoke the superclass constructor on the new object
     // then use .call() to invoke the constructor as a method of
     // the object to be initialized.
-    Shape.call(this, ctx, name, ico, strokeColor, fillColor, lineWidth, stroked, filled, clearFct);
+    Shape.call(this, draw, name, ico, strokeColor, fillColor, lineWidth, stroked, filled, clearFct);
 };
 Rectangle.prototype = Object.create( Shape.prototype );
 
@@ -47,6 +47,7 @@ Rectangle.prototype = Object.create( Shape.prototype );
  */
 Rectangle.prototype.addPoint = function(x, y){
 
+    var ctx = this.ctx(); //get actual ctx
     if(this.startPoint == null){
         this.startPoint = { x:x, y:y };
     }
@@ -56,13 +57,13 @@ Rectangle.prototype.addPoint = function(x, y){
         this.lastPoint = {x: x, y: y};
 
         if(this.filled){
-            this.ctx.fillStyle="#" + this.fillColor;
-            this.ctx.fillRect(this.startPoint.x, this.startPoint.y, this.lastPoint.x - this.startPoint.x, this.lastPoint.y - this.startPoint.y);
+            ctx.fillStyle="#" + this.fillColor;
+            ctx.fillRect(this.startPoint.x, this.startPoint.y, this.lastPoint.x - this.startPoint.x, this.lastPoint.y - this.startPoint.y);
         }
         if(this.stroked) {
-            this.ctx.lineWidth = this.lineWidth;
-            this.ctx.strokeStyle = "#" + this.strokeColor;
-            this.ctx.strokeRect(this.startPoint.x, this.startPoint.y, this.lastPoint.x - this.startPoint.x, this.lastPoint.y - this.startPoint.y);
+            ctx.lineWidth = this.lineWidth;
+            ctx.strokeStyle = "#" + this.strokeColor;
+            ctx.strokeRect(this.startPoint.x, this.startPoint.y, this.lastPoint.x - this.startPoint.x, this.lastPoint.y - this.startPoint.y);
         }
     }
 
@@ -76,12 +77,12 @@ Rectangle.prototype.end = function(){
 };
 
 
-var Oval = function (ctx, name, ico, strokeColor, fillColor, lineWidth, stroked, filled, clearFct) {
+var Oval = function (draw, name, ico, strokeColor, fillColor, lineWidth, stroked, filled, clearFct) {
 
     // Invoke the superclass constructor on the new object
     // then use .call() to invoke the constructor as a method of
     // the object to be initialized.
-    Shape.call(this, ctx, name, ico, strokeColor, fillColor, lineWidth, stroked, filled, clearFct);
+    Shape.call(this, draw, name, ico, strokeColor, fillColor, lineWidth, stroked, filled, clearFct);
 };
 Oval.prototype = Object.create( Shape.prototype );
 
@@ -108,25 +109,27 @@ Oval.prototype.addPoint = function(x, y){
 };
 
 Oval.prototype.drawEllipse = function(cx, cy, rx, ry){
-    this.ctx.save(); // save context state
-    this.ctx.beginPath();
+    var ctx = this.ctx(); //get the actual ctx
 
-    this.ctx.translate(cx-rx, cy-ry);
-    this.ctx.scale(rx, ry);
-    this.ctx.arc(1, 1, 1, 0, 2 * Math.PI, false);
+    ctx.save(); // save context state
+    ctx.beginPath();
 
-    this.ctx.restore(); // restore the original context state
+    ctx.translate(cx-rx, cy-ry);
+    ctx.scale(rx, ry);
+    ctx.arc(1, 1, 1, 0, 2 * Math.PI, false);
+
+    ctx.restore(); // restore the original context state
 
 
     // apply styling
     if(this.filled) {
-        this.ctx.fillStyle = "#" + this.fillColor;
-        this.ctx.fill();
+        ctx.fillStyle = "#" + this.fillColor;
+        ctx.fill();
     }
     if(this.stroked) {
-        this.ctx.lineWidth = this.lineWidth;
-        this.ctx.strokeStyle = "#" + this.strokeColor;
-        this.ctx.stroke();
+        ctx.lineWidth = this.lineWidth;
+        ctx.strokeStyle = "#" + this.strokeColor;
+        ctx.stroke();
     }
 };
 

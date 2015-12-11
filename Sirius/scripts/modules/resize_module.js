@@ -10,7 +10,7 @@
 
 var resizeModule = angular.module('resizeModule', ['drawModule']);
 
-drawModule.factory('resizeUtils', function(drawUtils) {
+resizeModule.factory('resizeUtils', function(drawUtils) {
     var resizeModule = {};
 
     //
@@ -33,13 +33,18 @@ drawModule.factory('resizeUtils', function(drawUtils) {
     resizeModule.resizeApp = function(w, h){
 
         var h = h - $('#head').height() - 5 - $('#control_tool_inUse').height(); //border = 5px
-        var left_pannels = $('.left_pannel');
+
+        console.log($('.left_pannel'));
 
         var widthPannels = 0;
         $('.left_pannel').each(function() {
             $(this).height(h);
             widthPannels = widthPannels + $(this).width();
+
+
         });
+
+
 
         resizeModule.resizeCanvas(w - widthPannels - 4, h);
     };
@@ -50,10 +55,12 @@ drawModule.factory('resizeUtils', function(drawUtils) {
      *   w, h = new sizes
      */
     resizeModule.resizeCanvas = function(w, h){
-        var canvas = $('#draw');
-        canvas.attr('width', w);
-        canvas.attr('height', h);
 
+        $('.draw').each(function() {
+            var canvas = $(this);
+            canvas.attr('width', w);
+            canvas.attr('height', h);
+        });
 
         drawUtils.draw();
     };

@@ -11,7 +11,7 @@
 
 (function() {
 
-    var app = angular.module('Drawer', ['selectTools-directives', 'drawModule', 'resizeModule']);
+    var app = angular.module('Drawer', ['selectTools-directives', 'calcs-directives', 'drawModule', 'resizeModule']);
 
 
     
@@ -33,7 +33,7 @@
     //==== Windows resizing                                           ====
     //====================================================================
     
-    app.controller('GlobalViewCtrl', function ($scope, $rootScope, drawUtils, resizeUtils) {
+    app.controller('GlobalViewCtrl', function ($scope, drawUtils, resizeUtils) {
         
         // --- --- --- --- --- --- --- --- --- --- ---
         // --- --- --- --- JS resizing --- --- --- ---
@@ -75,8 +75,6 @@
     
     
     app.controller('DrawZoneCtrl', function($scope, drawUtils){
-
-
         drawUtils.draw();
     });
     

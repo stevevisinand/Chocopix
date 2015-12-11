@@ -14,9 +14,9 @@
  * @param ctx
  * @constructor
  */
-var Tool = function(ctx, name, ico){
+var Tool = function(draw, name, ico){
 
-    this.ctx = ctx;
+    this.draw = draw;
     this.name = name;
     this.ico = ico;
 };
@@ -37,7 +37,10 @@ Tool.prototype.end = function(){
     throw new Error("Can't use an abstract class!");
 };
 
-
-
-
+/**
+ * get the current ctx
+ */
+Tool.prototype.ctx = function(){
+    return this.draw.getActualContext();
+};
 

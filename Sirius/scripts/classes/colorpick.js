@@ -11,15 +11,15 @@
 
 /**
  * Pencil tool, Tool heritage
- * @param ctx : canvas context
+ * @param draw : contain canvas context
  * @constructor
  */
-var Colorpick = function (ctx, fctCallback, widthDraw, heightDraw) {
+var Colorpick = function (draw, fctCallback, widthDraw, heightDraw) {
 
     // Invoke the superclass constructor on the new object
     // then use .call() to invoke the constructor as a method of
     // the object to be initialized.
-    Tool.call(this, ctx, "", "");
+    Tool.call(this, draw, "", "");
 
     this.fctCallbackColor = fctCallback;
     this.widthDraw = widthDraw;
@@ -39,7 +39,7 @@ Colorpick.prototype = Object.create( Tool.prototype );
 Colorpick.prototype.addPoint = function(mouseX, mouseY){
 
     //  get imageData object from canvas
-    var imagedata = this.ctx.getImageData(0, 0, this.widthDraw, this.heightDraw);
+    var imagedata = this.ctx().getImageData(0, 0, this.widthDraw, this.heightDraw);
 
     //  get pixelArray from imagedata object
     var data = imagedata.data;

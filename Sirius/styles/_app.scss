@@ -1,0 +1,510 @@
+@charset "UTF-8";
+/*--        ____________ _____   				            --*/
+/*--       /            \    /   				            --*/
+/*--      /     _________\  /					            --*/
+/*--      \     \          /					            --*/
+/*--       \     \        /	 Steve Visinand		            --*/
+/*--        \     \      /   26.10.15			            --*/
+/*--   ______\     \    /	 styles.css    		            --*/
+/*--  /             \  /	 "Main styles file"		        --*/
+/*-- /_______________\/							            --*/
+
+
+@font-face {
+  font-family: Lato;
+  src: url(../fonts/Lato-Regular.ttf);
+}
+@font-face{
+  font-family: Lato-thin;
+  src: url(../fonts/Lato-Thin.ttf);
+}
+@font-face{
+  font-family: Lobster;
+  src: url(../fonts/Lobster.otf);
+}
+@font-face{
+  font-family: Roboto;
+  src: url(../fonts/Roboto-Regular.ttf);
+}
+
+
+
+//Mixins
+//Utils
+@mixin transition($time, $type:linear, $element:background) {
+  -webkit-transition: $element $time $type;
+  -moz-transition: $element $time $type;
+  -ms-transition: $element $time $type;
+  -o-transition: $element $time $type;
+  transition: $element $time $type;
+}
+
+
+
+
+/*--- Initials styles ---*/
+body {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background-color: $color-background-dark;
+
+  background-image: url(http://www.transparenttextures.com/patterns/graphy-dark.png);
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+}
+
+p{
+  font-family: Lato, Arial, sans-serif;
+}
+h1,h2,h3,h4{
+  font-family: Roboto, sans-serif;
+  font-weight: 600;
+}
+
+/*--- Head ---*/
+header#head{
+  margin: 0;
+  height: 50px;
+  background-color: $color-primary;
+
+  position: relative;
+
+  padding-left: 10px;
+  padding-right: 10px;
+
+  //-webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.8);
+  //box-shadow: 0 0 10px 0 rgba(0,0,0,0.8);
+
+  z-index: 50;
+
+
+  /*background-image: url(http://www.transparenttextures.com/patterns/absurdity.png);*/
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+
+
+  #head_logo{
+    display: inline-block;
+    height: 100%;
+
+    p{
+      margin: 0;
+      padding: 0;
+
+      vertical-align: middle;
+      line-height: 50px;
+
+      font-family: Lobster, Arial;
+      font-size: 30px;
+      color: white;
+
+      text-shadow: 1px 1px 0 #000000;
+    }
+  }
+}
+
+/*--- Body ---*/
+
+.left_pannel{
+  margin: 0;
+
+  width: 240px;
+  height: auto;
+
+
+  border-style: solid;
+  border-width: 2px;
+  border-color: $color-secondary;
+
+  background-color: white;
+
+  -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.4);
+  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.4);
+
+  display: inline-block;
+
+  float: left;
+  position: relative;
+
+
+  .left_pannel_name{
+    width: 100%;
+    background-color: $color-secondary;
+
+
+    height: 40px;
+
+    p{
+      margin: 0;
+      line-height: 40px;
+      vertical-align: middle;
+      text-align: center;
+
+      color: white;
+    }
+  }
+}
+
+.control_tool{
+  /**background-color: #00C3FF;**/
+
+  background-color: $color-background-light;
+  padding: 6px;
+  padding-top: 4px;
+  padding-bottom: 0px;
+
+  margin-bottom: 5px;
+  margin-top: 5px;
+
+  height: 40px;
+
+  @include transition(0.2s);
+
+  z-index: 40;
+
+  position: relative;
+
+
+  &:hover{
+    background-color: $color-secondary-lighter;
+
+    color: white;
+    cursor: pointer;
+
+    @include transition(0.2s);
+  }
+  &:active{
+    background-color: $color-secondary;
+
+    @include transition(0.2s);
+  }
+}
+
+#control_tool_used{
+  color: white;
+  background-color: $color-secondary;
+}
+
+.control_tool_ico i{
+  padding: 0px;
+  margin: 0px;
+  margin-right: 10px;
+  font-size: 32px;
+  line-height: 32px;
+  vertical-align: middle;
+  line-height: 32px;
+}
+.control_tool_title {
+
+  padding: 0px;
+  margin: 0px;
+
+  p {
+    padding: 0px;
+    margin: 0px;
+
+    vertical-align: middle;
+    line-height: 32px;
+  }
+}
+.control_tool div{
+  height: 40px;
+  display: inline-block;
+}
+
+
+.control_element{
+
+  border-style: solid;
+  border-width: 1px;
+  border-color: $color-background-mid;
+
+  display: inline-block;
+  cursor: pointer;
+
+  -webkit-border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px;
+
+  @include transition(0.2s);
+
+  &:hover{
+    -webkit-box-shadow: 0 0 2px 0 rgba(0,0,0,0.4);
+    box-shadow: 0 0 2px 0 rgba(0,0,0,0.4);
+  }
+
+  i{
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+    text-align: center;
+  }
+}
+
+.control_head{
+  margin-top: 15px;
+  margin-bottom: 5px;
+
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: grey;
+
+  p{
+    margin: 0;
+  }
+}
+
+.control_cat{
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#control_melange {
+  background-color: #c6c6c6;
+  padding: 15px;
+}
+
+.melange_color {
+  background-color: dimgrey;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+
+  -webkit-border-radius: 20px 20px 20px 20px;
+  border-radius: 20px 20px 20px 20px;
+
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+#draw {
+  /**background-color: white;**/
+}
+
+#drawing_zone {
+  display: inline-block;
+  position: relative;
+}
+
+.draw{
+  padding-top: 0px;
+  position: absolute;
+  left: 0px;
+  top: -10px;
+}
+
+/**Control tool in use**/
+#control_tool_inUse{
+  background-color: $color-secondary;
+  height: 50px;
+
+
+  z-index: 45;
+  position: relative;
+
+  border-color: $color-background-dark;
+  border-width: 1px;
+  border-bottom-style: dashed;
+}
+
+#control_tool_inUse_title{
+  width: 223px;
+  padding-left: 10px;
+
+  h1{
+    color: white;
+    line-height: 30px;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+    font-weight: lighter;
+  }
+}
+
+.control_tool_inUse_box {
+
+  vertical-align: top;
+  overflow: hidden;
+
+  display: inline-block;
+  height: 30px;
+  margin: 10px;
+  margin-left: 0px;
+  margin-right: 0px;
+
+  padding-left: 10px;
+  padding-right: 10px;
+
+  border-color: $color-background-dark;
+  border-width: 1px;
+  border-right-style: dashed;
+
+  color:white;
+  font-family: Roboto, sans-serif;
+  font-weight: lighter;
+
+
+  p{
+    color: white;
+    margin:0;
+    padding:0;
+
+  }
+  label {
+    color:white;
+    font-family: Roboto, sans-serif;
+    font-weight: lighter;
+    line-height: 30px;
+    vertical-align: middle;
+  }
+  .unit {
+    display: inline-block;
+    line-height: 30px;
+    vertical-align: middle;
+    color: white;
+    font-family: Roboto, sans-serif;
+  }
+  .numberinput {
+    width: 100px;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+  .buttoninput {
+    width: 100px;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+}
+
+
+.calc{
+
+  padding: 6px;
+
+  padding-bottom: 0;
+
+  margin-bottom: 5px;
+  margin-top: 5px;
+
+
+  position: relative;
+
+
+
+  background-color: $color-background-light;
+  position: relative;
+  height: 55px;
+
+  &:hover{
+    background-color: $color-secondary-lighter;
+    color: white;
+    cursor: pointer;
+    @include transition(0.2s);
+  }
+}
+
+#calc_used{
+  background-color: $color-secondary !important;
+  color: white;
+}
+
+.calc-infos{
+  display: inline-block;
+  margin: 0;
+
+  p{
+    padding: 0;
+    margin: 0;
+    vertical-align: middle;
+  }
+  line-height: 47px;
+
+}
+
+.calc-control{
+  display: inline-block;
+  float: right;
+  line-height: 47px;
+  margin-top: 6px;
+
+  .calc-control-pos{
+    display: inline-block;
+    margin-right: 4px;
+
+    i{
+      display: block;
+    }
+  }
+
+  .calc-control-delete{
+    vertical-align: top;
+    margin-top: 6px;
+    line-height: 20px;
+    margin-right: 5px;
+  }
+}
+
+.calc-img{
+  display: inline-block;
+  width: 47px;
+  height: 47px;
+  background-color: grey;
+  vertical-align: top;
+
+}
+
+/**POPUP**/
+
+#fade {
+  /*--Masque opaque noir de fond--*/
+  display: none; /*--masqué par défaut--*/
+  background: $color-primary-darker;
+  position: fixed; left: 0; top: 0;
+  width: 100%; height: 100%;
+  opacity: .80;
+  z-index: 99;
+}
+.popup_block{
+  display: none; /*--masqué par défaut--*/
+  background: #fff;
+  padding: 0px;
+  border: none;
+  float: left;
+  font-size: 0.9em;
+  position: fixed;
+  top: 100px; left: 50%;
+  z-index: 99999;
+  /*--Les différentes définitions de Box Shadow en CSS3--*/
+  -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.4);
+  font-family:Arial, Helvetica, sans-serif;
+  color:#333;
+  overflow-y:auto;
+}
+
+.close_popup{
+  width:100%;
+  height:30px;
+  margin:0px;
+  background-color:$color-secondary-lighter;
+  text-align:center;
+  padding-top:5px;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size:18px;
+  color:#FFF;
+  margin-top: 5px;
+
+  cursor:pointer;
+
+  &:hover{
+    background-color:$color-secondary;
+  }
+}
+.popup_title{
+  text-align: center;
+}

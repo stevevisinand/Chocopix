@@ -10,15 +10,15 @@
 
 /**
  * Pencil tool, Tool heritage
- * @param ctx : canvas context
+ * @param draw : draw
  * @constructor
  */
-var Pencil = function (ctx, name, ico, brush) {
+var Pencil = function (draw, name, ico, brush) {
 
     // Invoke the superclass constructor on the new object
     // then use .call() to invoke the constructor as a method of
     // the object to be initialized.
-    Tool.call(this, ctx, name, ico);
+    Tool.call(this, draw, name, ico);
 
     this.line = [];
     this.distPt = 0;

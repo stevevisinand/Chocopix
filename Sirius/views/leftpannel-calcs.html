@@ -1,0 +1,37 @@
+<!--        ____________ _____   				           -->
+<!--       /            \    /   				           -->
+<!--      /     _________\  /					           -->
+<!--      \     \          /					           -->
+<!--       \     \        /	 Steve Visinand		           -->
+<!--        \     \      /   26.10.15			           -->
+<!--   ______\     \    /	 index.html		               -->
+<!--  /             \  /	 "left pannel element		   -->
+<!-- /_______________\/		 , draw tools"				   -->
+<!--                                                       -->
+<!--            <drawtoolspannel></drawtoolspannel>        -->
+
+<div class="left_pannel">
+
+    <div class="left_pannel_name">
+        <p>{{panelcalc.name}}</p>
+    </div>
+
+
+    <div class="calc"
+         ng-repeat="calc in panelcalc.calcs |reverse"
+         ng-click="panelcalc.setActivCalc(calc)"
+         ng-attr-id="{{panelcalc.drawZone.isCalcActiv(calc) ? 'calc_used' : '' }}">
+        <div class="calc-img">&nbsp;</div>
+        <div class="calc-infos">
+            <p>{{calc.name}}</p>
+        </div>
+        <div class="calc-control">
+            <i class="fa fa-trash calc-control-delete"></i>
+            <div class="calc-control-pos">
+                <i class="fa fa-sort-asc"></i>
+                <i class="fa fa-sort-desc"></i>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -52,6 +52,7 @@
         <script type="text/javascript" src="scripts/modules/selectTools_module.js"></script>
         <script type="text/javascript" src="scripts/modules/draw_module.js"></script>
         <script type="text/javascript" src="scripts/modules/resize_module.js"></script>
+        <script type="text/javascript" src="scripts/modules/calcs_modules.js"></script>
 
         <!-- POO : Model -->
         <script type="text/javascript" src="scripts/classes/tool.js"></script>
@@ -60,7 +61,7 @@
         <script type="text/javascript" src="scripts/classes/brush.js"></script>
         <script type="text/javascript" src="scripts/classes/draw.js"></script>
         <script type="text/javascript" src="scripts/classes/colorpick.js"></script>
-
+        <script type="text/javascript" src="scripts/classes/calc.js"></script>
 
 
         <!-- Plugin -->
@@ -87,18 +88,19 @@
     </head>
     <body id="body" ng-controller="GlobalViewCtrl">
         <header id="head">
-                <div id="head_logo"><p>Pixel Papaye</p></div>
+                <div id="head_logo"><p>Chocopix</p></div>
         </header>
-
 
         <toppenpannel></toppenpannel>
         <topshapepannel></topshapepannel>
         <drawtoolspannel></drawtoolspannel>
+        <calcspannel></calcspannel>
 
         <div id="drawing_zone">
 
-            <canvas id="draw" ng-controller="DrawZoneCtrl"></canvas>
-        </div>
 
+            <!--<canvas id="draw-0" class="draw" ng-controller="DrawZoneCtrl"></canvas>-->
+            <!--<canvas id="draw-1" class="draw" ng-controller="DrawZoneCtrl"></canvas>-->
+        </div>
     </body>
 </html>
